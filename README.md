@@ -80,4 +80,4 @@ java.time, BigDecimal, Collections, and Streams
 LaTroy Richardson (Tynyx / NyameDrift)
 📍 Montevideo, Uruguay | Orlando, Florida
 🎓 BAS – Computing Technology & Software Development
-🔗 GitHub: github.com/latro-richardson
+🔗 GitHub: github.com/Tynyx
