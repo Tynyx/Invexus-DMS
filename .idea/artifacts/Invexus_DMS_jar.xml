@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" build-on-make="true" name="Invexus-DMS:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/Invexus_DMS_jar</output-path>
+    <root id="archive" name="Invexus-DMS.jar">
+      <element id="module-output" name="Invexus-DMS" />
+    </root>
+  </artifact>
+</component>

@@ -65,20 +65,35 @@ public class App {
                     BigDecimal cost = input.nextBigDecimal();
                     input.nextLine();
 
-                    System.out.println("Enter Purchase Year, Month, Day (YYYY-MM-DD): ");
-                    String line = input.nextLine();
-                    String[] parts = line.split("[^0-9]+");
-                    int y = parseInt(parts[0]), m = parseInt(parts[1]), d = parseInt(parts[2]);
-                    LocalDate purchaseDate = LocalDate.of(y, m, d);
 
-                    System.out.println("Enter Warranty Year, Month, Day (YYYY-MM-DD): ");
-                    line = input.nextLine();
-                    String[] parts2 = line.split("[^0-9]+");
-                    y = parseInt(parts2[0]);
-                    m = parseInt(parts2[1]);
-                    d = parseInt(parts2[2]);
+                    String line = null;
+                    int y = 0, m = 0, d = 0;
+                    LocalDate purchaseDate = null;
+                    try {
+                        System.out.println("Enter Purchase Year, Month, Day (YYYY-MM-DD): ");
+                        line = input.nextLine();
+                        String[] parts = line.split("[^0-9]+");
+                        d = parseInt(parts[2]);
+                        m = parseInt(parts[1]);
+                        y = parseInt(parts[0]);
+                        purchaseDate = LocalDate.of(y, m, d);
+                    } catch (NumberFormatException e) {
+                        System.out.println("Invalid Purchase Year, Month, Day (YYYY-MM-DD): ");
+                    }
 
-                    LocalDate warrantyEnd = LocalDate.of(y, m, d);
+                    LocalDate warrantyEnd = null;
+                    try {
+                        System.out.println("Enter Warranty Year, Month, Day (YYYY-MM-DD): ");
+                        line = input.nextLine();
+                        String[] parts2 = line.split("[^0-9]+");
+                        y = parseInt(parts2[0]);
+                        m = parseInt(parts2[1]);
+                        d = parseInt(parts2[2]);
+
+                        warrantyEnd = LocalDate.of(y, m, d);
+                    } catch (NumberFormatException e) {
+                        System.out.println("Invalid Warranty Year, Month, Day (YYYY-MM-DD): ");
+                    }
 
                     Asset asset = new Asset(tag, name, category, purchaseDate, cost, AssetStatus.IN_STOCK, false, warrantyEnd);
                     boolean added = manager.add(asset);
