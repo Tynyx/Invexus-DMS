@@ -1,0 +1,21 @@
+assetTag,name,category,purchaseDate,unitCost,status,assigned,warrantyEnd
+PR001,HP Printer,Office,2023-01-05,300.49,IN_STOCK,false,2026-01-05
+MN001,Dell Monitor,Electronics,2023-02-22,220.00,IN_STOCK,false,2028-02-22
+KB001,Mechanical Keyboard,Accessories,2024-01-10,89.99,IN_STOCK,true,2026-01-10
+MS001,Wireless Mouse,Accessories,2023-04-18,45.50,IN_STOCK,false,2025-04-18
+SD001,Samsung SSD,Storage,2024-03-25,150.00,IN_STOCK,true,2029-03-25
+RT001,WiFi Router,Networking,2022-08-12,95.00,IN_STOCK,false,2027-08-12
+SP001,Smart Speaker,Audio,2023-09-09,99.99,IN_STOCK,true,2028-09-09
+SR001,Server Rack,Hardware,2022-11-19,1750.00,IN_STOCK,true,2030-11-19
+BK001,Backup Drive,Storage,2022-04-01,125.00,IN_STOCK,false,2027-04-01
+LP001,Lenovo Laptop,Computers,2024-05-15,1150.00,IN_STOCK,true,2029-05-15
+MB001,MacBook Air,Computers,2023-10-01,1399.00,IN_STOCK,false,2028-10-01
+TB001,ThinkPad Tablet,Computers,2023-06-25,650.00,IN_STOCK,false,2028-06-25
+CP001,Canon Projector,Office,2023-12-11,480.00,IN_STOCK,true,2028-12-11
+CM001,Conference Mic,Audio,2024-02-08,210.00,IN_STOCK,true,2029-02-08
+VC001,Video Camera,Electronics,2024-01-30,899.00,IN_STOCK,false,2029-01-30
+SW001,Smart Watch,Wearables,2023-03-10,249.99,IN_STOCK,true,2028-03-10
+HD001,Hard Drive,Storage,2024-04-12,135.00,IN_STOCK,false,2029-04-12
+GF001,Graphics Card,Hardware,2024-02-28,599.99,IN_STOCK,true,2029-02-28
+KB002,Wireless Keyboard,Accessories,2023-09-21,79.00,IN_STOCK,false,2028-09-21
+CH001,Office Chair,Furniture,2022-07-17,185.00,IN_STOCK,true,2027-07-17

@@ -1,0 +1,20 @@
+LT001,Office Laptop,Electronics,2022/05/15,1250.99,IN_STOCK,true,2027/05/15
+LT002,Workstation PC,Electronics,2021-03-10,,IN_USE,true,2026-03-10
+PR001 HP Printer Office 2023-01-05 300.49 IN_STOCK false 2026-01-05
+PH001,Pixel Phone,Mobile,INVALID_DATE,899.99,IN_USE,true,2025-10-10
+MN001,Dell Monitor,Electronics,2023-02-22,TwoTwenty,IN_STOCK,false,2028-02-22
+KB001,Mechanical Keyboard,Accessories,2024-01-10,89.99,IN_STOCK,,2026-01-10
+MS001,Wireless Mouse,Accessories,2023-04-18,45.50,IN_STOCK
+HD001,Seagate HDD,Storage,2022-12-05,79.99,IN_USE,TRUE
+SD001,Samsung SSD,Storage,2024-03-25,150.00,IN_STOCK,true,INVALID_DATE
+SW001,MS Office,Software,2023-07-01,120.00,IN_USE,true,2026-07-01
+RT001,WiFi Router,Networking,2022-08-12,95.00,IN_STOCK,false
+CM001,Conference Mic,Audio,2024-06-08,135.75,IN_USE,true,2029-06-08
+SP001,Smart Speaker,Audio,2023-09-09,99.99,IN_STOCK,true
+TB001,Drawing Tablet,Design,2023-05-15,349.00,IN_USE,false,2028-05-15
+CN001,Canon Camera,Media,2024-02-28,850.00,IN_USE,true,2029-02-28
+LP003,MacBook Pro,Laptops,2021-09-14,2200.00,IN_USE,true,2026-09-14
+SR001,Server Rack,Hardware,2022-11-19,1750.00,IN_STOCK,true,2030-11-19
+PR002,Label Printer,Office,2023-03-03,215.00,IN_USE,yes,2026-03-03
+BK001,Backup Drive,Storage,2022-04-01,125.00,IN_STOCK,false,2027-04-01
+HD002,External HDD,Storage,2024-05-30,99.99,IN_USE,true,2029-05-30
