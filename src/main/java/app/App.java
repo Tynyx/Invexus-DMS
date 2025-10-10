@@ -13,7 +13,6 @@ import app.service.*;
 import app.io.AssetFileImporter;
 
 import java.io.IOException;
-import java.lang.reflect.Array;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
@@ -266,9 +265,13 @@ public class App {
                     var total = manager.totalInventoryValue();
                     System.out.println("Total Inventory Value: $" + total.setScale(2, java.math.RoundingMode.HALF_UP));
 
+                    break;
+
                 case 0:
                     running = false;
                     System.out.println("Exiting Invexus DMS...");
+
+
 
                 default:
                     System.out.println("Invalid choice. Try again.");
