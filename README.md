@@ -23,6 +23,34 @@ Implement the **core logic and data validation** for all CRUD operations using J
 
 ---
 
+## Phase 2 — Software Testing (JUnit 5)
+
+**Owner:** LaTroy Richardson (CEN-3024C)  
+**What I tested:** All CRUD operations, file open/import, and the custom action (Total Inventory Value).
+
+### What this phase does (plain talk)
+- I wrote JUnit 5 tests under `src/test/java` that hit my service layer (`AssetManager`) and the file importer.
+- Positive and negative cases are included so bad inputs are handled instead of crashing.
+
+### Test coverage
+- **Add**: saves a new asset; duplicate tag returns `false` and does not create a second record.
+- **Update**: updates an existing asset and returns `true`; missing tag returns `false`.
+- **Delete**: removes by tag and returns `true`; blank/missing tag returns `false`.
+- **List/Display**: `listAll()` returns the expected size/contents (no reliance on println).
+- **Open a File**: importer loads a valid CSV; bad path throws/returns an error and the program continues.
+- **Custom Action**: `totalInventoryValue()` equals the sum of unit costs in the repository.
+
+### How to run tests
+- IntelliJ: right-click `src/test/java` → **Run 'All Tests'**  
+- Or run individual test classes (gutter play icons).
+
+### Notes
+- Phase 2 is CLI + files only (no database).
+- The importer uses validators to skip bad rows and print why they were skipped (for the grader to see).
+- Videos show both passing and failing cases per the rubric.
+- 
+---
+
 ### 🗂️ Project Structure
 src/
 ├── app/
