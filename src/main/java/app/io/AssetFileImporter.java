@@ -1,15 +1,12 @@
-/**
- * Invexus DMS - <ClassName>
- * Author: LaTroy Richardson (CEN-3024C)
- * Purpose: This is the brains behind the file import to make an easy flow for the Assetmanager and CLi to use
- * Notes: Phase 1 - CLI, in-memory repository, file import (CSV/TXT).
- */
 
 
 package app.io;
 
-import app.domain.*;
+import app.domain.Asset;
+import app.domain.AssetStatus;
+import app.validation.validators;
 
+import java.io.BufferedReader;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.nio.file.Files;
@@ -17,48 +14,53 @@ import java.nio.file.Path;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Stream;
 
 public class AssetFileImporter {
 
-    public List<Asset> parseCsv(String filePath) throws IOException {
+    public List<Asset> parseCsv(String path) throws IOException {
         List<Asset> assets = new ArrayList<>();
-       if (filePath == null || filePath.isBlank()){
-           throw new IllegalArgumentException("File path is null or empty");
-       }
-       try (Stream<String> lines = Files.lines(Path.of(filePath))) {
-           int[] counter = {0};
+        Path file = Path.of(path);
+        //path resolve + header: keep it simple and auto-close the file
+        try (BufferedReader br = Files.newBufferedReader(file)) {
+            String line;
+            int lineNumber = 0;
 
-           lines.forEach(line -> {
-               counter[0]++;
-               if (counter[0] == 1 || line.isBlank()) return;
+            while ((line = br.readLine()) != null) {
+                lineNumber++;
 
+                // Ignore blank lines so users can space out their file
+                if (line.isBlank()) continue;
 
-               String[] cols = line.split(",");
-               if(cols.length <8){
-                   System.out.println("Skipping bad line (" + counter[0] + "): not enough columns");
-                   return;
-               }
+                // Spilt the CSV so we check each section of var or strings to determine if they are valid or not
+                String[] cols = line.split(",");
+                if (cols.length < 8) {
+                    System.out.println("Skipping bad line (" + lineNumber + "): not enough columns");
+                    continue;
+                }
 
-               try {
+                //scan each line to validate each field. if it dont match it will skip that row
+                try {
+                    String tag         = cols[0].trim();
+                    String name        = cols[1].trim();
+                    String category    = cols[2].trim();
+                    LocalDate purchase = validators.parseDateFlexible(cols[3].trim());
+                    BigDecimal cost    = validators.parseMoney(cols[4].trim());
+                    AssetStatus status = validators.parseStatus(cols[5].trim());
+                    boolean assigned   = validators.parseBooleanLoose(cols[6].trim());
+                    LocalDate warranty = validators.parseDateFlexible(cols[7].trim());
 
-                       Asset a = new Asset(
-                               cols[0].trim(),
-                               cols[1].trim(),
-                               cols[2].trim(),
-                               LocalDate.parse(cols[3].trim()),
-                               new BigDecimal(cols[4].trim()),
-                               AssetStatus.valueOf(cols[5].trim().toUpperCase()),
-                               Boolean.parseBoolean(cols[6].trim()),
-                               LocalDate.parse(cols[7].trim())
-                       );
-                       assets.add(a);
+                    Asset a = new Asset(tag, name, category, purchase, cost, status, assigned, warranty);
+                    assets.add(a);
+                    //These here are cathces to handle anything we didnt expect and keep moving
+                } catch (IllegalArgumentException e) {
+                    System.out.println("Skipping bad line (" + lineNumber + "): " + e.getMessage());
+                } catch (Exception e) {
 
-               } catch (Exception e) {
-                   System.out.println("Skipping bad line (" + counter[0] + "): " + e.getMessage());
-               }
-           });
-       }
+                    System.out.println("Skipping bad line (" + lineNumber + "): " + e);
+                }
+            }
+        }
+
         return assets;
     }
 }

@@ -11,15 +11,12 @@ import app.domain.*;
 import app.repository.*;
 import app.service.*;
 import app.io.AssetFileImporter;
-
-import java.io.IOException;
+import app.validation.validators;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 import java.util.Scanner;
-
-import static java.lang.Integer.parseInt;
 
 public class App {
     // This is main class that takes all the code and populate the results to CLI and GUI
@@ -31,6 +28,8 @@ public class App {
         AssetManager manager = new AssetManager(new InMemoryAssetRepository());
         AssetFileImporter importer = new AssetFileImporter();
 
+
+
         boolean running = true;
         while (running) {
 
@@ -38,7 +37,7 @@ public class App {
             System.out.println("1. Add Asset");
             System.out.println("2. List All Assets");
             System.out.println("3. Upload Assets by CSV/TXT");
-            System.out.println("4. Search by Tag");
+            System.out.println("4. Search Asset by Tag");
             System.out.println("5. Update Asset");
             System.out.println("6. Delete Asset");
             System.out.println("7. Total Inventory Value");
@@ -46,56 +45,79 @@ public class App {
             System.out.println("Enter your choice: ");
 
 
-            int choice = input.nextInt();
-            input.nextLine();
+            int choice;
+            try {
+                choice = Integer.parseInt(input.nextLine().trim());
+            } catch (NumberFormatException e) {
+                System.out.println("Please choose between 0 and 7 ");
+                continue;
+            }
+
 
             switch (choice) {
                 // Add an asset to the Invexus DMS
                 case 1:
                     System.out.println("Enter Asset Tag: ");
-                    String tag = input.nextLine();
+                    String tag = input.nextLine().trim();
 
                     System.out.println("Enter Asset Name: ");
-                    String name = input.nextLine();
+                    String name = input.nextLine().trim();
 
                     System.out.println("Enter Category: ");
-                    String category = input.nextLine();
+                    String category = input.nextLine().trim();
 
-                    System.out.println("Enter Unit Cost: ");
-                    BigDecimal cost = input.nextBigDecimal();
-                    input.nextLine();
-
-
-                    String line = null;
-                    int y = 0, m = 0, d = 0;
-                    LocalDate purchaseDate = null;
-                    try {
-                        System.out.println("Enter Purchase Year, Month, Day (YYYY-MM-DD): ");
-                        line = input.nextLine();
-                        String[] parts = line.split("[^0-9]+");
-                        d = parseInt(parts[2]);
-                        m = parseInt(parts[1]);
-                        y = parseInt(parts[0]);
-                        purchaseDate = LocalDate.of(y, m, d);
-                    } catch (NumberFormatException e) {
-                        System.out.println("Invalid Purchase Year, Month, Day (YYYY-MM-DD): ");
+                    // Cost being handled via the validators
+                    BigDecimal cost;
+                    while(true) {
+                        System.out.println("Unit Cost: ");
+                        try {
+                            cost = validators.parseMoney(input.nextLine().trim());
+                            break;
+                        } catch (IllegalArgumentException ex) {
+                            System.out.println(ex.getMessage());
+                        }
                     }
 
-                    LocalDate warrantyEnd = null;
-                    try {
-                        System.out.println("Enter Warranty Year, Month, Day (YYYY-MM-DD): ");
-                        line = input.nextLine();
-                        String[] parts2 = line.split("[^0-9]+");
-                        y = parseInt(parts2[0]);
-                        m = parseInt(parts2[1]);
-                        d = parseInt(parts2[2]);
 
-                        warrantyEnd = LocalDate.of(y, m, d);
-                    } catch (NumberFormatException e) {
-                        System.out.println("Invalid Warranty Year, Month, Day (YYYY-MM-DD): ");
+                    //dates being handled with validators
+                    LocalDate purchaseDate, warrantyEnd;
+                    while(true) {
+                        System.out.println("Purchase Date (YYYY-MM-DD): ");
+                        try {
+                            purchaseDate = validators.parseDateFlexible(input.nextLine().trim());
+                            break;
+                        } catch (IllegalArgumentException ex) {
+                            System.out.println(ex.getMessage());
+                        }
+                    }
+                    while(true) {
+                        System.out.println("Warranty End (YYYY-MM-DD): ");
+                        try {
+                            warrantyEnd = validators.parseDateFlexible(input.nextLine().trim());
+                            break;
+                        } catch (IllegalArgumentException ex) {
+                            System.out.println(ex.getMessage());
+                        }
                     }
 
-                    Asset asset = new Asset(tag, name, category, purchaseDate, cost, AssetStatus.IN_STOCK, false, warrantyEnd);
+
+                    // Status with validators
+                    AssetStatus status;
+                    while(true) {
+                        System.out.println("Status (IN_STOCK / ASSIGNED / REPAIR / RETIRED): ");
+                        try {
+                            status = validators.parseStatus(input.nextLine().trim());
+                            break;
+                        } catch (IllegalArgumentException ex) {
+                            System.out.println(ex.getMessage());
+                        }
+                    }
+
+                    // Assigned (Optional)
+                    System.out.print("Assigned? (y/n): ");
+                    boolean assigned = validators.parseBooleanLoose(input.nextLine().trim());
+
+                    Asset asset = new Asset(tag, name, category, purchaseDate, cost, status, assigned,  warrantyEnd);
                     boolean added = manager.add(asset);
 
                     if (added) {
@@ -112,159 +134,107 @@ public class App {
 
                 case 3:
                     // Upload a File
-                    System.out.println("Please enter the file path to the list of assets (please remove and quotation: ");
-                    String path = input.nextLine();
-                    if (path.isBlank()) {
-                        System.out.println("Blank file path. try again.");
-                        break;
-                    }
-
+                    System.out.println("Please enter the file path " +
+                            " (please remove and quotation): ");
+                    String path = input.nextLine().trim();
+                    if (path.isBlank()) { System.out.println("Blank file path."); break; }
                     try {
                         List<Asset> parsed = importer.parseCsv(path);
-
                         if (parsed.isEmpty()) {
-                            System.out.println("No valid rows found in file.");
+                            System.out.println("No valid rows found.");
                             break;
                         }
 
-                        // preview a few rows to satisfy 'display file contents'
-                        System.out.println("\nPreview (up to 5 rows):");
                         parsed.stream().limit(5).forEach(System.out::println);
-                        if (parsed.size() > 5) {
-                            System.out.println("... (" + (parsed.size() - 5) + " more rows)");
-                        }
-
-                        // ask to import
-                        System.out.println("\nImport these into the system? (Y/N)");
-                        String yesNo = input.nextLine().trim().toLowerCase();
-                        if (yesNo.equals("y")) {
-                            int ported = manager.importAssets(parsed);
-                            System.out.println("Imported " + ported + " of " + parsed.size() + "(duplicates skipped).");
-                        } else {
-                            System.out.println("Import canceled. Nothing was saved.");
-                        }
-
-                    } catch (IllegalArgumentException e) {
-                        System.out.println("Invalid path: " + e.getMessage());
-                    } catch (IOException e) {
-                        System.out.println("Error reading file: " + e.getMessage());
+                        int ported = manager.importAssets(parsed);
+                        System.out.println("Imported" + ported + " of " + parsed.size() + " (duplicates skipped).");
+                    } catch (Exception e) {
+                        System.out.println("Import failed: " + e.getMessage());
                     }
-
-
                     break;
 
-                case 4:
-                    // Search By Tag
-                    System.out.println("Enter Asset Tag to search: ");
-                    String findTag = input.nextLine();
 
-                    Optional<Asset> found = manager.findByTag(findTag);
-                    if (found.isPresent()) {
-                        System.out.println("Asset Found: ");
-                        System.out.println(found.get());
+                case 4:
+                    // Search By Asset Tag
+                    System.out.println("Enter Asset Tag to search: ");
+                    String aTag = input.nextLine().trim();
+                    Optional<Asset> res = manager.findByTag(aTag);
+                    if (res.isPresent()) {
+                        System.out.println(res.get());
                     } else {
                         System.out.println("Asset not found.");
                     }
 
-
                     break;
 
                 case 5:
-                    // Update an Asset
-                    System.out.println("Enter Asset Tag to update: ");
-                    tag = input.nextLine();
-
-                    Optional<Asset> existing = manager.findByTag(tag);
-                    if(!existing.isPresent()) {
-                        System.out.println("Asset not found.");
-                        break;
+                    System.out.print("Enter Asset Tag to update: ");
+                    String aTag2 = input.nextLine().trim();
+                    Optional<Asset> exisitingOpt = manager.findByTag(aTag2);
+                    if (!exisitingOpt.isPresent()) {
+                        System.out.println("Asset not found."); break;
                     }
+                    Asset current = exisitingOpt.get();
 
-                    Asset current = existing.get();
-
-                    System.out.println("New Asset name [ " + current.getName() + "]: ");
+                    System.out.print("New Name [" + current.getName() + "]: ");
                     String newName = input.nextLine().trim();
-                    if (newName.isBlank()) newName = current.getName();
+                    if (newName.isEmpty()) newName = current.getName();
 
-                    System.out.println("New Asset category [ " + current.getCategory() + "]: ");
+                    System.out.print("New Category [" + current.getCategory() + "]: ");
                     String newCategory = input.nextLine().trim();
-                    if (newCategory.isBlank()) newCategory = current.getCategory();
+                    if (newCategory.isEmpty()) newCategory = current.getCategory();
 
-                    LocalDate newPurchaseDate;
+                    BigDecimal newCost = current.getUnitCost();
                     while (true) {
-
-                        System.out.println("New purchase date [ " + current.getPurchaseDate() + "]: ");
-                        String pDateStr = input.nextLine().trim();
-                        if (pDateStr.isBlank()) { newPurchaseDate = current.getPurchaseDate(); break; }
-                        try {
-                            newPurchaseDate = LocalDate.parse(pDateStr);
-                            break;
-                        } catch (Exception e) {
-                            System.out.println("Invalid purchase date: " + pDateStr);
-                        }
+                        System.out.print("New cost {" + current.getUnitCost() + "}: ");
+                        String s = input.nextLine().trim();
+                        if (s.isEmpty()) break;
+                        try { newCost = validators.parseMoney(s); break; }
+                        catch (IllegalArgumentException ex) {System.out.println(ex.getMessage());}
                     }
 
-                    BigDecimal newCost;
+                    LocalDate newPurchase = current.getPurchaseDate();
                     while (true) {
-                        System.out.println("New Asset Unit Cost [ " + current.getUnitCost() + "]: ");
-                        String costStr = input.nextLine().trim();
-                        if (costStr.isEmpty()) {
-                            newCost = current.getUnitCost();
-                            break;
-                        }
-                        try {
-                            newCost = new BigDecimal(costStr);
-                            break;
-                        } catch (NumberFormatException e) {
-                            System.out.println("Invalid number. Try again.");
-                        }
+                        System.out.print("New purchase date (YYYY-MM-DD) [" + current.getPurchaseDate() + "]: ");
+                        String s = input.nextLine().trim();
+                        if (s.isEmpty()) break;
+                        try { newPurchase = validators.parseDateFlexible(s); break; }
+                        catch (IllegalArgumentException ex) {System.out.println(ex.getMessage());}
+
                     }
 
-
-                    // updating status
-                    AssetStatus newStatus;
+                    LocalDate newWarranty = current.getWarrantyEnd();
                     while (true) {
-                        System.out.println("New Status (IN_STOCK / IN_USE / REPAIR / RETIRED) [" + current.getStatus() + "]" );
-                        String statusStr = input.nextLine().trim();
-                        if (statusStr.isEmpty()) { newStatus = AssetStatus.IN_STOCK; break; }
-                        try {
-                            newStatus = AssetStatus.valueOf(statusStr.toUpperCase());
-                            break;
-                        } catch (IllegalArgumentException e) {
-                            System.out.println("Invalid status. Try again.");
-                        }
+                        System.out.print("New warranty end (YYYY-MM-DD) [" + current.getWarrantyEnd() + "]: ");
+                        String s = input.nextLine().trim();
+                        if (s.isEmpty()) break;
+                        try { newWarranty = validators.parseDateFlexible(s); break; }
+                        catch (IllegalArgumentException ex) {System.out.println(ex.getMessage());}
                     }
 
-                    // updating warrantyEnd
-                    LocalDate newWarrantyEnd;
+                    AssetStatus newStatus = current.getStatus();
                     while (true) {
-                        System.out.println("New warranty end [ " + current.getWarrantyEnd() + "]" );
-                        String endStr = input.nextLine().trim();
-                        if (endStr.isEmpty()) { newWarrantyEnd = current.getWarrantyEnd(); break; }
-                        try {
-                            newWarrantyEnd = LocalDate.parse(endStr);
-                            break;
-                        } catch (Exception e) {
-                            System.out.println("Invalid date. Try again.");
-                        }
+                        System.out.print("New status (IN_STOCK / ASSIGNED / REPAIR / RETIRED) [" + current.getStatus() + "]: ");
+                        String s = input.nextLine().trim();
+                        if (s.isEmpty()) break;
+                        try { newStatus = validators.parseStatus(s); break; }
+                        catch (IllegalArgumentException ex) {System.out.println(ex.getMessage());}
                     }
 
                     Asset updated = new Asset(
                             current.getAssetTag(),
                             newName,
                             newCategory,
-                            newPurchaseDate,
+                            newPurchase,
                             newCost,
                             newStatus,
-                            current.getAssigned(),
-                            newWarrantyEnd
+                            current.isAssigned(),
+                            newWarranty
                     );
-
-                    boolean success = manager.update(updated);
-                    System.out.println( success ? "Asset updated" : "Asset not updated");
-
-
+                    boolean ok = manager.update(updated);
+                    System.out.println(ok ? "Asset updated successfully" : "Asset update failed.");
                     break;
+
 
                 case 6:
                     // Delete
@@ -286,6 +256,8 @@ public class App {
                     running = false;
                     System.out.println("Exiting Invexus DMS...");
 
+                    break;
+
 
 
                 default:
@@ -304,4 +276,8 @@ public class App {
 
 
     }
+
+
+
+
 }

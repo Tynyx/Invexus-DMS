@@ -30,47 +30,40 @@ public class InMemoryAssetRepository implements AssetRepository {
     private final Map<String, Asset> store = new LinkedHashMap<>();
 
     // returns a list of all assets currently in the map
+    @Override
     public List<Asset> findAll() {
         return new ArrayList<>(store.values());
     }
 
     // Adds or update an asset in the map using its tags as the key, then returns that same asset.
+    @Override
     public Asset save(Asset asset) {
 
         // if the store does not contain this keyiD already then go ahead and save it.
-            if (!store.containsKey(asset.getAssetTag())) {
+            if (asset == null || asset.getStatus() == null) throw new IllegalArgumentException("Asset or tag is required");
             store.put(asset.getAssetTag(), asset);
-            } else {
-                System.out.println("Asset already exists");
-            }
 
             return asset;
     }
 
     //Looks for an asset by tag and if its found it will populate if not it will not populate
+    @Override
     public Optional<Asset> findByTag(String assetTag) {
+        if (assetTag == null || assetTag.isBlank()) {
+            return Optional.empty();
+        }
         return Optional.ofNullable(store.get(assetTag));
     }
 
     // Removes the asset with that tag, returns true if its exited, false otherwise
+    @Override
     public boolean delete(String assetTag) {
         return store.remove(assetTag) != null;
     }
 
 
-    // Scans through all assets and returns a list of those whose names contain the given keyword
-    public List<Asset> searchByName(String keyword) {
-        List<Asset> result = new ArrayList<>();
-        for (Asset asset : store.values()) {
-            if (asset.getName().toLowerCase().contains(keyword.toLowerCase())) {
-                result.add(asset);
-                return result;
-            }
 
-        }
 
-        return result;
-    }
 
 
 

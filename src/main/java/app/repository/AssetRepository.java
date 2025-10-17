@@ -33,7 +33,7 @@ public interface AssetRepository {
 
     boolean delete(String assetTag);
 
-    List<Asset> searchByName(String keyword);
+
 
 
 }

@@ -127,4 +127,7 @@ public class Asset {
     }
 
 
+    public boolean isAssigned() {
+        return assigned;
+    }
 }
