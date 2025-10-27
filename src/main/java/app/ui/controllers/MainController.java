@@ -102,6 +102,7 @@ public class MainController {
                 .map(a -> a.getUnitCost().multiply(BigDecimal.valueOf(a.getQuantity())))
                 .reduce(BigDecimal.ZERO, BigDecimal::add);
         lblTotalValue.setText("$" + total);
+        tblAssets.refresh();
     }
     private static String nz(String s) { return s == null ? "" : s.trim(); }
     private void setStatus(String s) { if (lblStatus != null) lblStatus.setText(s); }
@@ -117,6 +118,7 @@ public class MainController {
         boolean ok = manager.add(newAsset);
         if (ok) {
             master.add(newAsset);
+            tblAssets.refresh();
             onFilterChanged(); // refreshes filtered list and total
             setStatus("Added asset " + newAsset.getAssetTag());
         } else {
@@ -131,13 +133,14 @@ public class MainController {
             setStatus("Select a row to edit");
             return;
         }
-
+        tblAssets.refresh();
         Asset edited = AssetFormController.showDialog(selected);
         if (edited != null) {
             boolean ok = manager.update(edited);
             if (ok) {
                 int index = master.indexOf(selected);
                 master.set(index, edited);
+                tblAssets.refresh();
                 onFilterChanged();
                 setStatus("Edited asset " + edited.getAssetTag());
             } else {
@@ -186,8 +189,8 @@ public class MainController {
     @FXML
     private void onImportCSV() {
         FileChooser fileChooser = new FileChooser();
-        fileChooser.setTitle("Select CSV File");
-        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("CSV Files", "*.csv"));
+        fileChooser.setTitle("Select Asset File");
+        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Assets Files", "*.csv", "*.txt"));
 
         File file = fileChooser.showOpenDialog(tblAssets.getScene().getWindow());
         if (file == null) return;

@@ -63,6 +63,7 @@ public class AssetFormController {
         try {
             String name = txtName.getText().trim();
             String tag = txtTag.getText().trim();
+            String location = txtLocation.getText().trim();
             BigDecimal unit = new BigDecimal(txtUnitCost.getText().trim());
             int qty = Integer.parseInt(txtQty.getText().trim());
 
@@ -71,7 +72,7 @@ public class AssetFormController {
             Asset newAsset = new Asset(
                     tag,
                     name,
-                    "",
+                    location,
                     date,
                     unit,
                     qty,

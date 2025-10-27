@@ -23,25 +23,120 @@ Implement the **core logic and data validation** for all CRUD operations using J
 
 ---
 
+## Phase 2 — Software Testing (JUnit 5)
+
+**Owner:** LaTroy Richardson (CEN-3024C)  
+**What I tested:** All CRUD operations, file open/import, and the custom action (Total Inventory Value).
+
+### What this phase does (plain talk)
+- I wrote JUnit 5 tests under `src/test/java` that hit my service layer (`AssetManager`) and the file importer.
+- Positive and negative cases are included so bad inputs are handled instead of crashing.
+
+### Test coverage
+- **Add**: saves a new asset; duplicate tag returns `false` and does not create a second record.
+- **Update**: updates an existing asset and returns `true`; missing tag returns `false`.
+- **Delete**: removes by tag and returns `true`; blank/missing tag returns `false`.
+- **List/Display**: `listAll()` returns the expected size/contents (no reliance on println).
+- **Open a File**: importer loads a valid CSV; bad path throws/returns an error and the program continues.
+- **Custom Action**: `totalInventoryValue()` equals the sum of unit costs in the repository.
+
+### How to run tests
+- IntelliJ: right-click `src/test/java` → **Run 'All Tests'**
+- Or run individual test classes (gutter play icons).
+
+### Notes
+- Phase 2 is CLI + files only (no database).
+- The importer uses validators to skip bad rows and print why they were skipped (for the grader to see).
+- Videos show both passing and failing cases per the rubric.
+
+---
+
+# Invexus DMS - Phase 3
+
+> CEN-3024C | Software Development I  
+> Developed by LaTroy Richardson
+
+## 🧭 Overview
+
+Invexus DMS (Digital Management System) is a desktop application designed for tracking and managing IT assets across an organization. Built with JavaFX, it features an intuitive GUI that allows users to perform asset management operations efficiently.
+
+---
+
+## 🚀 Features Implemented (Phase 3)
+
+- ✅ GUI implemented with JavaFX
+- ✅ Add / Edit / Delete assets with validation
+- ✅ CSV import support (with error skipping and status reporting)
+- ✅ Live filtering by tag and status
+- ✅ Dynamic total asset value calculation
+- ✅ Table auto-refresh and interaction bindings
+- ✅ Location field added and fully integrated in UI
+- ✅ Status bar + debug-friendly logging
+
+---
+
+## 📁 CSV Format
+
+To import assets, use a `.csv` file with the following column structure:
+
+```csv
+Tag,Name,Status,Quantity,Unit Cost,Acquired,Location
+AS001,Work Laptop,RETIRED,1,1006.23,2020-07-04,Office A
+```
+🧪 Testing Coverage
+Feature	Status
+Add Asset	✅ Works with form validation
+Edit Asset	✅ Auto-populates form, updates view
+Delete Asset	✅ Confirmation prompt + table refresh
+CSV Import	✅ Handles valid rows, skips bad lines
+Filter by Tag	✅ Live filtering
+Filter by Status	✅ Dropdown-controlled
+Total Value	✅ Auto-calculated on filter/import
+
+
+Shares the link with view permissions
+--- 
+
 ### 🗂️ Project Structure
-src/
-├── app/
-│ ├── App.java # Main CLI entry point
-│ ├── io/
-│ │ └── AssetFileImporter.java
-│ ├── service/
-│ │ └── AssetManager.java
-│ ├── repository/
-│ │ ├── AssetRepository.java
-│ │ └── InMemoryAssetRepository.java
-│ ├── domain/
-│ │ ├── Asset.java
-│ │ └── AssetStatus.java
-│ └── validation/
-│ └── Validators.java
-└── assets/
-├── goodAssets.txt
-└── badAssets.txt
+Invexus-DMS/
+│
+├── pom.xml                         # Maven config (JavaFX + dependencies)
+├── README.md                       # Clean project overview & usage (Phase 3)
+├── .gitignore                      # Ignores target/, *.class, etc.
+│
+├── src/
+│   └── main/
+│       ├── java/
+│       │   └── app/
+│       │       ├── App.java                         # Launcher class (JavaFX)
+│       │
+│       │       ├── domain/
+│       │       │   └── Asset.java                   # Asset class (POJO)
+│       │       │   └── AssetStatus.java             # Enum for asset status
+│       │
+│       │       ├── repository/
+│       │       │   └── AssetRepository.java         # Interface for asset repo
+│       │       │   └── InMemoryAssetRepository.java # Concrete in-memory impl
+│       │
+│       │       ├── service/
+│       │       │   └── AssetManager.java            # Core logic for add/edit/delete/search
+│       │
+│       │       ├── io/
+│       │       │   └── AssetFileImporter.java       # CSV file parsing with validation
+│       │
+│       │       └── ui/
+│       │           └── controllers/
+│       │               ├── MainController.java      # Handles GUI logic
+│       │               └── AssetFormController.java # Modal form for Add/Edit
+│       │
+│       └── resources/
+│           └── ui/
+│               ├── main_view.fxml                  # Main window layout
+│               └── asset_form.fxml                 # Asset input modal
+│           └── css/
+│               └── style.css                      # Invexus green/blue theme
+│
+└── target/                          # Compiled bytecode (ignored in Git)
 
 
 ---
