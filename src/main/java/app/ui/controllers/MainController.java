@@ -39,7 +39,6 @@ public class MainController {
     private final ObservableList<Asset> master = FXCollections.observableArrayList();
     private final ObservableList<Asset> filtered = FXCollections.observableArrayList();
     private final DateTimeFormatter dateFmt = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-    private final ObservableList<Asset> filteredAssets = FXCollections.observableArrayList();
 
 
     @FXML
@@ -67,7 +66,7 @@ public class MainController {
         master.setAll(manager.listAll());
         filtered.setAll(master);
         tblAssets.setItems(filtered);
-        tblAssets.setItems(filteredAssets);
+
 
         // totals + status
         updateTotalFrom(filtered);
@@ -204,7 +203,7 @@ public class MainController {
 
             int imported = manager.importAssets(parsed);
             master.addAll(parsed);
-            filteredAssets.setAll(master);
+            filtered.setAll(master);
             tblAssets.refresh();
             setStatus("Imported " + imported + " of " + parsed.size() + " assets.");
         } catch (Exception e) {
