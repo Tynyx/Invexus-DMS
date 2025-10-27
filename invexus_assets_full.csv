@@ -1,0 +1,21 @@
+Tag,Name,Location,Purchase Date,Unit Cost,Quantity,Status,Assigned
+AS001,Work Laptop,HQ - Room 101,2020-07-04,1006.23,1,RETIRED,False
+AS002,Office Monitor,HQ - Room 102,2020-05-18,1352.73,10,IN_STOCK,False
+AS003,Keyboard,HQ - Room 103,2019-08-06,409.97,10,ACTIVE,True
+AS004,Mouse,HQ - Room 104,2020-02-14,337.81,5,RETIRED,False
+AS005,Webcam,HQ - Room 105,2022-08-14,1257.24,1,RETIRED,False
+AS007,Router,Server Room,2020-02-19,393.54,2,RETIRED,False
+AS008,Printer,Print Center,2023-01-25,1369.34,4,IN_STOCK,True
+AS009,Scanner,Print Center,2021-03-14,1022.63,5,RETIRED,False
+AS010,NAS Device,Server Room,2020-11-21,1160.18,2,ACTIVE,True
+AS011,Server Rack,Data Center,2022-10-22,1242.58,9,ACTIVE,True
+AS012,UPS Battery,Data Center,2022-09-04,1142.25,9,ACTIVE,True
+AS015,Desk Phone,Front Office,2020-07-27,278.16,4,RETIRED,False
+AS016,Projector,HQ - Meeting Room,2020-07-03,1238.4,1,IN_STOCK,False
+AS017,Label Maker,Shipping Dept,2019-07-22,952.07,1,IN_STOCK,False
+AS019,External HDD,IT Locker,2022-05-18,1209.62,10,IN_STOCK,True
+AS020,Air Purifier,Wellness Office,2019-12-26,1187.83,4,RETIRED,False
+AS021,Smart TV,Break Room,2021-09-15,1322.15,2,IN_STOCK,False
+AS022,Docking Station,HQ - Room 106,2021-11-03,324.11,6,ACTIVE,True
+AS023,iPad,HR Dept,2023-03-01,899.99,3,IN_STOCK,False
+AS024,MacBook,Design Studio,2023-06-20,2149.75,2,ACTIVE,True

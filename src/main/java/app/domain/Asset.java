@@ -20,12 +20,13 @@ public class Asset {
 
     final String assetTag;
     private String name;
-    private String category;
+    private String location;
     private LocalDate purchaseDate;
     private BigDecimal unitCost;
-    private final AssetStatus status  ;
+    private final AssetStatus status;
     private boolean assigned;
     private LocalDate warrantyEnd;
+    private int quantity;
 
     @Override
     public boolean equals(Object o) {
@@ -40,15 +41,16 @@ public class Asset {
     }
 
     //Constructors
-    public Asset(String assetTag, String name, String category, LocalDate purchaseDate, BigDecimal unitCost, AssetStatus status, boolean assigned, LocalDate warrantyEnd) {
+    public Asset(String assetTag, String name, String location, LocalDate purchaseDate, BigDecimal unitCost, int quantity, AssetStatus status, boolean assigned) {
         this.assetTag = assetTag;
         this.name = name;
-        this.category = category;
+        this.location = location;
         this.purchaseDate = purchaseDate;
         this.unitCost = unitCost;
+        this.quantity = quantity;
         this.status = status;
         this.assigned = assigned;
-        this.warrantyEnd = warrantyEnd;
+
     }
 
     // Getters and Setters which allows the coder to pull and set the value of each attribute
@@ -69,12 +71,12 @@ public class Asset {
         this.name = name;
     }
 
-    public String getCategory() {
-        return category;
+    public String getLocation() {
+        return location;
     }
 
-    public void setCategory(String category) {
-        this.category = category;
+    public void setLocation(String location) {
+        this.location = location;
     }
 
     public LocalDate getPurchaseDate() {
@@ -93,6 +95,13 @@ public class Asset {
         this.unitCost = unitCost;
     }
 
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
+    }
 
 
     public boolean getAssigned() {
@@ -111,13 +120,28 @@ public class Asset {
         this.warrantyEnd = warrantyEnd;
     }
 
+
+
+    public Asset copy() {
+        return new Asset(
+                this.assetTag,
+                this.name,
+                this.location,
+                this.purchaseDate,
+                this.unitCost,
+                this.quantity,
+                this.status,
+                this.assigned
+        );
+    }
+
     // Override to ensure the code can be used to make string even though they not strings
     @Override
     public String toString() {
         return "Asset{" +
                 "assetTag='" + assetTag + '\'' +
                 ", name='" + name + '\'' +
-                ", category='" + category + '\'' +
+                ", category='" + location + '\'' +
                 ", purchaseDate=" + purchaseDate +
                 ", unitCost=" + unitCost +
                 ", status='" + status + '\'' +
@@ -130,4 +154,6 @@ public class Asset {
     public boolean isAssigned() {
         return assigned;
     }
+
+
 }

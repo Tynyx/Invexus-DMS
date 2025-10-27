@@ -29,6 +29,14 @@ public class App {
         AssetFileImporter importer = new AssetFileImporter();
 
 
+        List<Asset> importedAssets = CSVAssetImporter.importFromCSV("src/main/resources/sample_assets.csv");
+
+        for (Asset a : importedAssets) {
+            manager.add(a);
+        }
+
+
+
 
         boolean running = true;
         while (running) {
@@ -63,8 +71,8 @@ public class App {
                     System.out.println("Enter Asset Name: ");
                     String name = input.nextLine().trim();
 
-                    System.out.println("Enter Category: ");
-                    String category = input.nextLine().trim();
+                    System.out.println("Enter location: ");
+                    String location = input.nextLine().trim();
 
                     // Cost being handled via the validators
                     BigDecimal cost;
@@ -80,7 +88,7 @@ public class App {
 
 
                     //dates being handled with validators
-                    LocalDate purchaseDate, warrantyEnd;
+                    LocalDate purchaseDate;
                     while(true) {
                         System.out.println("Purchase Date (YYYY-MM-DD): ");
                         try {
@@ -90,10 +98,11 @@ public class App {
                             System.out.println(ex.getMessage());
                         }
                     }
+                    int quantity;
                     while(true) {
-                        System.out.println("Warranty End (YYYY-MM-DD): ");
+                        System.out.println("Quantity: ");
                         try {
-                            warrantyEnd = validators.parseDateFlexible(input.nextLine().trim());
+                            quantity = validators.parseInt(input.nextLine().trim());
                             break;
                         } catch (IllegalArgumentException ex) {
                             System.out.println(ex.getMessage());
@@ -104,7 +113,7 @@ public class App {
                     // Status with validators
                     AssetStatus status;
                     while(true) {
-                        System.out.println("Status (IN_STOCK / ASSIGNED / REPAIR / RETIRED): ");
+                        System.out.println("Status (IN_STOCK / ACTIVE / IN_REPAIR / RETIRED): ");
                         try {
                             status = validators.parseStatus(input.nextLine().trim());
                             break;
@@ -117,7 +126,7 @@ public class App {
                     System.out.print("Assigned? (y/n): ");
                     boolean assigned = validators.parseBooleanLoose(input.nextLine().trim());
 
-                    Asset asset = new Asset(tag, name, category, purchaseDate, cost, status, assigned,  warrantyEnd);
+                    Asset asset = new Asset(tag, name, location, purchaseDate, cost, quantity, status, assigned);
                     boolean added = manager.add(asset);
 
                     if (added) {
@@ -180,9 +189,9 @@ public class App {
                     String newName = input.nextLine().trim();
                     if (newName.isEmpty()) newName = current.getName();
 
-                    System.out.print("New Category [" + current.getCategory() + "]: ");
-                    String newCategory = input.nextLine().trim();
-                    if (newCategory.isEmpty()) newCategory = current.getCategory();
+                    System.out.print(" New location [" + current.getLocation() + "]: ");
+                    String NewLocation = input.nextLine().trim();
+                    if (NewLocation.isEmpty()) NewLocation = current.getLocation();
 
                     BigDecimal newCost = current.getUnitCost();
                     while (true) {
@@ -191,6 +200,20 @@ public class App {
                         if (s.isEmpty()) break;
                         try { newCost = validators.parseMoney(s); break; }
                         catch (IllegalArgumentException ex) {System.out.println(ex.getMessage());}
+                    }
+
+                    int newQuantity = input.nextInt() - 1;
+                    while (true) {
+                        System.out.print("New quantity [" + newQuantity + "]: ");
+                        String s = input.nextLine().trim();
+                        if (s.isEmpty()) break;
+                    }
+
+                    String relocation = input.nextLine().trim();
+                    while (true) {
+                        System.out.print("New location [" + relocation + "]: ");
+                        String s = input.nextLine().trim();
+                        if (s.isEmpty()) break;
                     }
 
                     LocalDate newPurchase = current.getPurchaseDate();
@@ -203,18 +226,11 @@ public class App {
 
                     }
 
-                    LocalDate newWarranty = current.getWarrantyEnd();
-                    while (true) {
-                        System.out.print("New warranty end (YYYY-MM-DD) [" + current.getWarrantyEnd() + "]: ");
-                        String s = input.nextLine().trim();
-                        if (s.isEmpty()) break;
-                        try { newWarranty = validators.parseDateFlexible(s); break; }
-                        catch (IllegalArgumentException ex) {System.out.println(ex.getMessage());}
-                    }
+
 
                     AssetStatus newStatus = current.getStatus();
                     while (true) {
-                        System.out.print("New status (IN_STOCK / ASSIGNED / REPAIR / RETIRED) [" + current.getStatus() + "]: ");
+                        System.out.print("New status (IN_STOCK / ACTIVE / IN_REPAIR / RETIRED) [" + current.getStatus() + "]: ");
                         String s = input.nextLine().trim();
                         if (s.isEmpty()) break;
                         try { newStatus = validators.parseStatus(s); break; }
@@ -224,12 +240,12 @@ public class App {
                     Asset updated = new Asset(
                             current.getAssetTag(),
                             newName,
-                            newCategory,
+                            relocation,
                             newPurchase,
                             newCost,
+                            newQuantity,
                             newStatus,
-                            current.isAssigned(),
-                            newWarranty
+                            current.isAssigned()
                     );
                     boolean ok = manager.update(updated);
                     System.out.println(ok ? "Asset updated successfully" : "Asset update failed.");

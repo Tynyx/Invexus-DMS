@@ -1,0 +1,18 @@
+.root { -fx-font-family: "Inter", "Segoe UI", sans-serif; -fx-base: #0B1B2B; }
+
+.banner { -fx-background-color: linear-gradient(to right, #0B1B2B, #1F2E3C); -fx-padding: 12 16; }
+.title { -fx-text-fill: #E6EDF3; -fx-font-size: 20px; -fx-font-weight: 700; }
+.metric-label { -fx-text-fill: #E6EDF3; -fx-opacity: 0.85; }
+.metric-value { -fx-text-fill: #08C4A8; -fx-font-size: 18px; -fx-font-weight: 700; }
+
+.toolbar .button { -fx-background-color: #08C4A8; -fx-text-fill: #0B1B2B; -fx-font-weight: 700; -fx-background-radius: 8; }
+.toolbar .text-field, .toolbar .combo-box { -fx-background-radius: 8; }
+
+.statusbar { -fx-background-color: #1F2E3C; }
+.statusbar .label { -fx-text-fill: #E6EDF3; -fx-opacity: 0.9; }
+
+.table-view { -fx-background-color: #0B1B2B; }
+.table-view .column-header, .table-view .filler { -fx-background-color: #1F2E3C; -fx-text-fill: #E6EDF3; }
+.table-row-cell { -fx-background-color: #0B1B2B; }
+.table-row-cell:odd { -fx-background-color: #0F2235; }
+.table-cell { -fx-text-fill: #E6EDF3; }

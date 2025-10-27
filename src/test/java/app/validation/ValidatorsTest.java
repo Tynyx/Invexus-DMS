@@ -44,7 +44,7 @@ class ValidatorTest {
 
     @Test
     void parseStatus_valid() {
-        assertEquals(AssetStatus.REPAIR, validators.parseStatus("repair"));
+        assertEquals(AssetStatus.IN_REPAIR, validators.parseStatus("repair"));
     }
 
     @Test

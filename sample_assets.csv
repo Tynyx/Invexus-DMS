@@ -1,0 +1,21 @@
+Tag,Name,Location,PurchaseDate,UnitCost,Quantity,Status,Assigned
+AS001,Work Laptop,Office A,2020-07-04,1006.23,1,RETIRED,False
+AS002,Office Monitor,Office B,2020-05-18,1352.73,10,IN_STOCK,True
+AS003,Keyboard,Main Hall,2019-08-06,409.97,10,ACTIVE,False
+AS004,Mouse,Reception,2020-02-14,337.81,5,RETIRED,False
+AS005,Webcam,Server Room,2022-08-14,1257.24,1,RETIRED,False
+AS006,Smartphone,IT Closet,2022-01-30,285.67,6,BROKEN,False
+AS007,Router,2nd Floor,2020-02-19,393.54,2,RETIRED,True
+AS008,Printer,Main Office,2023-01-25,1369.34,4,IN_STOCK,True
+AS009,Scanner,Remote Site,2021-03-14,1022.63,5,RETIRED,False
+AS010,NAS Device,Lab Room,2020-11-21,1160.18,2,ACTIVE,False
+AS011,Server Rack,HQ,2022-10-22,1242.58,9,ACTIVE,True
+AS012,UPS Battery,East Wing,2022-09-04,1142.25,9,ACTIVE,False
+AS013,Conference Cam,West Wing,2019-04-18,889.05,8,BROKEN,True
+AS014,Tablet,North Office,2022-09-25,430.84,6,BROKEN,False
+AS015,Desk Phone,South Office,2020-07-27,278.16,4,RETIRED,True
+AS016,Projector,Storage,2020-07-03,1238.4,1,IN_STOCK,True
+AS017,Label Maker,Admin Room,2019-07-22,952.07,1,IN_STOCK,False
+AS018,Ethernet Switch,Training Room,2020-08-04,468.53,7,BROKEN,True
+AS019,External HDD,Break Room,2022-05-18,1209.62,10,IN_STOCK,False
+AS020,Air Purifier,Engineering,2019-12-26,1187.83,4,RETIRED,False

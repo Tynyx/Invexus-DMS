@@ -13,6 +13,7 @@ package app.service;
 
 
 import app.domain.Asset;
+import app.domain.AssetStatus;
 import app.repository.AssetRepository;
 
 
@@ -95,7 +96,8 @@ public class AssetManager  {
     public BigDecimal totalInventoryValue() {
         List<Asset> all = repo.findAll();
         return all.stream()
-                .map(Asset::getUnitCost)
+                .filter(a -> a.getStatus() != AssetStatus.RETIRED)
+                .map(a -> a.getUnitCost().multiply(BigDecimal.valueOf(a.getQuantity())))
                 .reduce(BigDecimal.ZERO, BigDecimal::add);
     }
 }

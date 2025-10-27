@@ -3,7 +3,7 @@
 //
 //  Purpose:
 //  - Keep all user-input checking in one spot so my CLI and importer stay clean.
-//  - Throw clear IllegalArgumentException messages so I can show fail tests on video.
+//  - Throw clear IllegalArgumentException messages, so I can show fail tests on video.
 //
 //  Style:
 //  - Methods are tiny and do one thing each.
@@ -51,13 +51,13 @@ public final class validators {
         }
     }
 
-    //This method is make sure nothing crashes the AssetStatus attibrute and tell the user how to properly use it
+    //This method is make sure nothing crashes the AssetStatus attribute and tell the user how to properly use it
     public static AssetStatus parseStatus(String s) {
         if (s == null || s.isBlank()) throw new IllegalArgumentException("Status is required");
         try {
             return AssetStatus.valueOf(s.toUpperCase());
         } catch (IllegalArgumentException ex) {
-            throw new IllegalArgumentException("Status must be one of: IN_STOCK, ASSIGNED, REPAIR, RETIRED.");
+            throw new IllegalArgumentException("Status must be one of: IN_STOCK, ACTIVE, IN_REPAIR, RETIRED.");
         }
     }
     //This method is to help user use more sensible methods of using the boolean true or false to yes or no and shorthand
@@ -68,4 +68,17 @@ public final class validators {
         if (t.equals("n") || t.equals("no") || t.equals("false")) return false;
         return Boolean.parseBoolean(t);
     }
+
+    public static int parseInt(String input) {
+        try {
+            int value = Integer.parseInt(input.trim());
+            if (value < 1 || value > 999) {
+                throw new IllegalArgumentException("Quantity must be between 1 and 999.");
+            }
+            return value;
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException("Invalid number format: " + input);
+        }
+    }
+
 }

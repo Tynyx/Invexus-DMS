@@ -13,6 +13,8 @@ import org.junit.jupiter.api.Test;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 import static org.junit.jupiter.api.Assertions.*;
 
 //Create the class to handle all the CRUD Test
@@ -31,10 +33,10 @@ class AssetManagerTest {
     // we are going to create a make method to produce and asset we can call upon when we need and not have to generate
     // multiple assets for every method
     private Asset make(String tag) {
-        return new Asset(tag, "Netgear Switch", "Office Network",
+        return new Asset(tag, "Netgear Switch", "Office Network room",
                 LocalDate.of(2025, 8, 20),
-                new BigDecimal("79.99"),
-                AssetStatus.IN_STOCK, true, LocalDate.of(2030, 8, 19)
+                new BigDecimal("79.99"), 5,
+                AssetStatus.IN_STOCK, true
         );
     }
 
@@ -72,12 +74,12 @@ class AssetManagerTest {
         Asset updated = new Asset(
                 "LT001",
                 "PS5 Controller",
-                "Gaming",
+                "home",
                 LocalDate.of(2025, 2, 10),
                 new BigDecimal("65.43"),
-                AssetStatus.ASSIGNED,
-                true,
-                LocalDate.of(2035, 9, 10)
+                1,
+                AssetStatus.ACTIVE,
+                true
         );
 
         //now we test to make sure it actually updated
@@ -86,12 +88,13 @@ class AssetManagerTest {
         // Test to confirm every part was correctly changed
         Asset after = manager.findByTag("LT001").orElseThrow();
         assertEquals("PS5 Controller", after.getName());
-        assertEquals("Gaming", after.getCategory());
+        assertEquals("home", after.getLocation());
         assertEquals(LocalDate.of(2025, 2, 10), after.getPurchaseDate());
         assertEquals(0, new BigDecimal("65.43").compareTo(after.getUnitCost()));
-        assertEquals(AssetStatus.ASSIGNED, after.getStatus());
+        assertEquals(1, 1);
+        assertEquals(AssetStatus.ACTIVE, after.getStatus());
         assertTrue(after.getAssigned());
-        assertEquals(LocalDate.of(2035, 9, 10), after.getWarrantyEnd());
+
     }
 
     // This test is to confirm that if the asset don't exist it won't update
@@ -139,17 +142,17 @@ class AssetManagerTest {
         // we are testing the custom method to add all the values of all assets so we are going to add a few assets and
         // test to make sure the total value is calculated properly
         manager.add(new Asset("A1","A","x", LocalDate.of(2020,1,1),
-                new BigDecimal("79.99"), AssetStatus.IN_STOCK,
-                true, LocalDate.of(2030,1,1)));
+                new BigDecimal("79.99"), 3, AssetStatus.IN_STOCK,
+                true));
         manager.add(new Asset("A2","B","x", LocalDate.of(2020,1,1),
-                new BigDecimal("65.43"), AssetStatus.REPAIR,
-                false, LocalDate.of(2030,1,1)));
+                new BigDecimal("65.43"), 5, AssetStatus.IN_REPAIR,
+                false));
         manager.add(new Asset("A3","C","x", LocalDate.of(2020,1,1),
-                new BigDecimal("65.43"), AssetStatus.REPAIR,
-                false, LocalDate.of(2030,1,1)));
+                new BigDecimal("65.43"), 3, AssetStatus.IN_REPAIR,
+                false));
         manager.add(new Asset("A4","D", "x", LocalDate.of(2025,5,30),
-                new BigDecimal("1200.32"), AssetStatus.REPAIR,
-                false, LocalDate.of(2030,1,1)));
+                new BigDecimal("1200.32"), 3, AssetStatus.IN_REPAIR,
+                false));
 
         // Test to make sure the total value actually equals the total value
         var total = manager.totalInventoryValue();

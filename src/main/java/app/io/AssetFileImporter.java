@@ -38,18 +38,19 @@ public class AssetFileImporter {
                     continue;
                 }
 
-                //scan each line to validate each field. if it dont match it will skip that row
+                //scan each line to validate each field. if it don't match it will skip that row
                 try {
                     String tag         = cols[0].trim();
                     String name        = cols[1].trim();
-                    String category    = cols[2].trim();
+                    String location    = cols[2].trim();
                     LocalDate purchase = validators.parseDateFlexible(cols[3].trim());
                     BigDecimal cost    = validators.parseMoney(cols[4].trim());
-                    AssetStatus status = validators.parseStatus(cols[5].trim());
-                    boolean assigned   = validators.parseBooleanLoose(cols[6].trim());
-                    LocalDate warranty = validators.parseDateFlexible(cols[7].trim());
+                    int qty          = Integer.parseInt(cols[5].trim());
+                    AssetStatus status = validators.parseStatus(cols[6].trim());
+                    boolean assigned   = validators.parseBooleanLoose(cols[7].trim());
 
-                    Asset a = new Asset(tag, name, category, purchase, cost, status, assigned, warranty);
+
+                    Asset a = new Asset(tag, name, location, purchase, cost, qty, status, assigned);
                     assets.add(a);
                     //These here are cathces to handle anything we didnt expect and keep moving
                 } catch (IllegalArgumentException e) {

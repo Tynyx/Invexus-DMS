@@ -1,0 +1,13 @@
+app\ui\controllers\AssetFormController.class
+app\App.class
+app\domain\Asset.class
+app\ui\Launcher.class
+app\repository\InMemoryAssetRepository.class
+app\ui\controllers\MainController.class
+app\domain\AssetStatus.class
+app\service\CSVAssetImporter.class
+app\repository\AssetRepository.class
+app\ui\MainApp.class
+app\io\AssetFileImporter.class
+app\validation\validators.class
+app\service\AssetManager.class

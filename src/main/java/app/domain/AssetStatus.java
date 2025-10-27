@@ -10,8 +10,8 @@ package app.domain;
 public enum AssetStatus {
     // created a nested enum so status can utilize it for each asset
         IN_STOCK,
-        ASSIGNED,
-        REPAIR,
+        ACTIVE,
+        IN_REPAIR,
         RETIRED
 
 }
