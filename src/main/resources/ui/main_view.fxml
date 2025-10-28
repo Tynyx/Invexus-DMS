@@ -23,7 +23,7 @@
                 <Label text="Invexus DMS" styleClass="title"/>
                 <Pane HBox.hgrow="ALWAYS"/>
                 <Label text="Total Assets Value:" styleClass="metric-label"/>
-                <Label fx:id="lblTotalValue" text=" '$0.00' " styleClass="metric-value"/>
+                <Label fx:id="lblTotalValue" text=" " styleClass="metric-value"/>
             </HBox>
 
             <!-- filters / actions -->

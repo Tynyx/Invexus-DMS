@@ -1,8 +1,8 @@
 .root { -fx-font-family: "Inter", "Segoe UI", sans-serif; -fx-base: #0B1B2B; }
 
 .banner { -fx-background-color: linear-gradient(to right, #0B1B2B, #1F2E3C); -fx-padding: 12 16; }
-.title { -fx-text-fill: #E6EDF3; -fx-font-size: 20px; -fx-font-weight: 700; }
-.metric-label { -fx-text-fill: #E6EDF3; -fx-opacity: 0.85; }
+.title { -fx-text-fill: #08C4A8; -fx-font-size: 20px; -fx-font-weight: 700; }
+.metric-label { -fx-text-fill: #1E9B5A; -fx-opacity: 0.85; }
 .metric-value { -fx-text-fill: #08C4A8; -fx-font-size: 18px; -fx-font-weight: 700; }
 
 .toolbar .button { -fx-background-color: #08C4A8; -fx-text-fill: #0B1B2B; -fx-font-weight: 700; -fx-background-radius: 8; }
@@ -16,3 +16,77 @@
 .table-row-cell { -fx-background-color: #0B1B2B; }
 .table-row-cell:odd { -fx-background-color: #0F2235; }
 .table-cell { -fx-text-fill: #E6EDF3; }
+
+
+/* invexus.css — palette */
+root {
+    /* Invexus navy + green */
+    -invx-navy:   #0C3C78;
+    -invx-navy-2: #082B57;
+    -invx-green:  #1E9B5A;
+    -invx-green-2:#147845;
+    -invx-bg:     #F5F7FA;
+    -invx-muted:  #6B7280;
+    -invx-border: #1E9B5A;
+}
+
+/* App background */
+.border-pane, .vbox, .hbox {
+    -fx-background-color: -invx-bg;
+}
+
+/* Banner */
+.banner {
+    -fx-padding: 10 16 10 16;
+    -fx-background-color: #1E9B5A;
+    -fx-border-color: -invx-border;
+    -fx-border-width: 0 0 1 0;
+}
+.title {
+    -fx-font-size: 20px;
+    -fx-text-fill: -invx-navy-2;
+    -fx-font-weight: bold;
+}
+.metric-label {
+    -fx-text-fill: -invx-muted;
+    -fx-font-size: 12px;
+}
+.metric-value {
+    -fx-text-fill: -invx-navy-2;
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+}
+
+/* Toolbar */
+.toolbar {
+    -fx-background-color: transparent;
+}
+.toolbar .button {
+    -fx-background-color: -invx-green;
+    -fx-text-fill: #1E9B5A;
+    -fx-background-radius: 12;
+}
+.toolbar .button:hover {
+    -fx-background-color: -invx-green-2;
+}
+
+/* Table */
+.table-view {
+    -fx-background-color: #1E9B5A;
+    -fx-border-color: -invx-border;
+    -fx-border-radius: 10;
+    -fx-background-radius: 10;
+}
+.table-view .column-header-background {
+    -fx-background-color: #08C4A8;
+}
+.table-row-cell:filled:hover {
+    -fx-background-color: #08C4A8;
+}
+
+/* Status bar */
+.statusbar {
+    -fx-background-color:#08C4A8;
+    -fx-border-color: -invx-border;
+    -fx-border-width: 1 0 0 0;
+}

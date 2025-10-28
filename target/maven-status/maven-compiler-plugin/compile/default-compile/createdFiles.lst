@@ -4,9 +4,11 @@ app\domain\Asset.class
 app\ui\Launcher.class
 app\repository\InMemoryAssetRepository.class
 app\ui\controllers\MainController.class
+app\ui\controllers\MainController$2.class
 app\domain\AssetStatus.class
 app\service\CSVAssetImporter.class
 app\repository\AssetRepository.class
+app\ui\controllers\MainController$1.class
 app\ui\MainApp.class
 app\io\AssetFileImporter.class
 app\validation\validators.class

@@ -50,6 +50,15 @@ public class MainController {
         colStatus.setCellValueFactory(c -> Bindings.createObjectBinding(() -> c.getValue().getStatus() == null ? "" : c.getValue().getStatus().name()));
         colQty.setCellValueFactory(c -> Bindings.createObjectBinding(c.getValue()::getQuantity));
         colUnitCost.setCellValueFactory(c -> Bindings.createObjectBinding(c.getValue()::getUnitCost));
+        colUnitCost.setCellFactory(col -> new TableCell<Asset, BigDecimal>() {
+            private final java.text.NumberFormat fmt = java.text.NumberFormat.getCurrencyInstance();
+            @Override protected void updateItem(BigDecimal value, boolean empty) {
+                super.updateItem(value, empty);
+                setText(empty || value == null
+                        ? ""
+                        : fmt.format(value.setScale(2, java.math.RoundingMode.HALF_UP)));
+            }
+        });
         colAcquired.setCellValueFactory(c -> Bindings.createObjectBinding(() -> {
             try {
                 var d = c.getValue().getPurchaseDate();
@@ -98,12 +107,23 @@ public class MainController {
 
     // helpers
     private void updateTotalFrom(List<Asset> list) {
+        // include only IN_STOCK, ASSIGNED, IN_REPAIR
         BigDecimal total = list.stream()
+                .filter(a -> a.getStatus() != null)
+                .filter(a -> switch (a.getStatus()) {
+                    case IN_STOCK, ACTIVE, IN_REPAIR -> true;
+                    default -> false; // RETIRED excluded
+                })
                 .map(a -> a.getUnitCost().multiply(BigDecimal.valueOf(a.getQuantity())))
-                .reduce(BigDecimal.ZERO, BigDecimal::add);
-        lblTotalValue.setText("$" + total);
+                .reduce(BigDecimal.ZERO, BigDecimal::add)
+                .setScale(2, java.math.RoundingMode.HALF_UP);
+
+        // currency format
+        var fmt = java.text.NumberFormat.getCurrencyInstance();
+        lblTotalValue.setText(fmt.format(total));
         tblAssets.refresh();
     }
+
     private static String nz(String s) { return s == null ? "" : s.trim(); }
     private void setStatus(String s) { if (lblStatus != null) lblStatus.setText(s); }
 
@@ -205,9 +225,8 @@ public class MainController {
             }
 
             int imported = manager.importAssets(parsed);
-            master.addAll(parsed);
-            filtered.setAll(master);
-            tblAssets.refresh();
+            master.setAll(manager.listAll());
+            onFilterChanged();
             setStatus("Imported " + imported + " of " + parsed.size() + " assets.");
         } catch (Exception e) {
             setStatus("Import failed: " + e.getMessage());

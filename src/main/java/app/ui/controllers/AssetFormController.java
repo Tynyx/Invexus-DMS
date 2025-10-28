@@ -97,6 +97,7 @@ public class AssetFormController {
 
 
 
+
     public static Asset showDialog(Asset existing) {
         try {
             FXMLLoader loader = new FXMLLoader(AssetFormController.class.getResource("/ui/asset_form.fxml"));
