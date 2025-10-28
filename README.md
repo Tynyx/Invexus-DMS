@@ -52,24 +52,45 @@ Implement the **core logic and data validation** for all CRUD operations using J
 ---
 
 ### 🗂️ Project Structure
-src/
-├── app/
-│ ├── App.java # Main CLI entry point
-│ ├── io/
-│ │ └── AssetFileImporter.java
-│ ├── service/
-│ │ └── AssetManager.java
-│ ├── repository/
-│ │ ├── AssetRepository.java
-│ │ └── InMemoryAssetRepository.java
-│ ├── domain/
-│ │ ├── Asset.java
-│ │ └── AssetStatus.java
-│ └── validation/
-│ └── Validators.java
-└── assets/
-├── goodAssets.txt
-└── badAssets.txt
+Invexus-DMS/
+│
+├── pom.xml                         # Maven config (JavaFX + dependencies)
+├── README.md                       # Clean project overview & usage (Phase 3)
+├── .gitignore                      # Ignores target/, *.class, etc.
+│
+├── src/
+│   └── main/
+│       ├── java/
+│       │   └── app/
+│       │       ├── App.java                         # Launcher class (JavaFX)
+│       │
+│       │       ├── domain/
+│       │       │   └── Asset.java                   # Asset class (POJO)
+│       │       │   └── AssetStatus.java             # Enum for asset status
+│       │
+│       │       ├── repository/
+│       │       │   └── AssetRepository.java         # Interface for asset repo
+│       │       │   └── InMemoryAssetRepository.java # Concrete in-memory impl
+│       │
+│       │       ├── service/
+│       │       │   └── AssetManager.java            # Core logic for add/edit/delete/search
+│       │
+│       │       ├── io/
+│       │       │   └── AssetFileImporter.java       # CSV file parsing with validation
+│       │
+│       │       └── ui/
+│       │           └── controllers/
+│       │               ├── MainController.java      # Handles GUI logic
+│       │               └── AssetFormController.java # Modal form for Add/Edit
+│       │
+│       └── resources/
+│           └── ui/
+│               ├── main_view.fxml                  # Main window layout
+│               └── asset_form.fxml                 # Asset input modal
+│           └── css/
+│               └── style.css                      # Invexus green/blue theme
+│
+└── target/                          # Compiled bytecode (ignored in Git)
 
 
 ---

@@ -4,12 +4,12 @@
 <?import javafx.scene.layout.*?>
 <BorderPane xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml"
             fx:controller="app.ui.controllers.MainController"
-            stylesheets="@invexus.css">
+            stylesheets="@../css/invexus.css">
     <top>
         <VBox spacing="8">
             <MenuBar>
                 <Menu text="File">
-                    <MenuItem text="Import CSV..." onAction="#onImportCSV"/>
+                    <MenuItem text="Import Assets..." onAction="#onImportCSV"/>
                     <SeparatorMenuItem/>
                     <MenuItem text="Exit" onAction="#onExit"/>
                 </Menu>
@@ -45,12 +45,12 @@
             <columns>
                 <TableColumn fx:id="colTag" text="Tag" prefWidth="100"/>
                 <TableColumn fx:id="colName" text="Name" prefWidth="100"/>
-                <TableColumn fx:id="colLocation" text="Location" prefWidth="350"/>
                 <TableColumn fx:id="colStatus" text="Status" prefWidth="120"/>
                 <TableColumn fx:id="colQty" text="Qty"/>
                 <TableColumn fx:id="colUnitCost" text="Unit Cost" prefWidth="120"/>
                 <TableColumn fx:id="colAcquired" text="Acquired" prefWidth="140"/>
-                            </columns>
+                <TableColumn fx:id="colLocation" text="Location" prefWidth="350"/>
+            </columns>
         </TableView>
     </center>
 
