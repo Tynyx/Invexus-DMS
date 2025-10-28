@@ -41,61 +41,15 @@ Implement the **core logic and data validation** for all CRUD operations using J
 - **Custom Action**: `totalInventoryValue()` equals the sum of unit costs in the repository.
 
 ### How to run tests
-- IntelliJ: right-click `src/test/java` → **Run 'All Tests'**
+- IntelliJ: right-click `src/test/java` → **Run 'All Tests'**  
 - Or run individual test classes (gutter play icons).
 
 ### Notes
 - Phase 2 is CLI + files only (no database).
 - The importer uses validators to skip bad rows and print why they were skipped (for the grader to see).
 - Videos show both passing and failing cases per the rubric.
-
+- 
 ---
-
-# Invexus DMS - Phase 3
-
-> CEN-3024C | Software Development I  
-> Developed by LaTroy Richardson
-
-## 🧭 Overview
-
-Invexus DMS (Digital Management System) is a desktop application designed for tracking and managing IT assets across an organization. Built with JavaFX, it features an intuitive GUI that allows users to perform asset management operations efficiently.
-
----
-
-## 🚀 Features Implemented (Phase 3)
-
-- ✅ GUI implemented with JavaFX
-- ✅ Add / Edit / Delete assets with validation
-- ✅ CSV import support (with error skipping and status reporting)
-- ✅ Live filtering by tag and status
-- ✅ Dynamic total asset value calculation
-- ✅ Table auto-refresh and interaction bindings
-- ✅ Location field added and fully integrated in UI
-- ✅ Status bar + debug-friendly logging
-
----
-
-## 📁 CSV Format
-
-To import assets, use a `.csv` file with the following column structure:
-
-```csv
-Tag,Name,Status,Quantity,Unit Cost,Acquired,Location
-AS001,Work Laptop,RETIRED,1,1006.23,2020-07-04,Office A
-```
-🧪 Testing Coverage
-Feature	Status
-Add Asset	✅ Works with form validation
-Edit Asset	✅ Auto-populates form, updates view
-Delete Asset	✅ Confirmation prompt + table refresh
-CSV Import	✅ Handles valid rows, skips bad lines
-Filter by Tag	✅ Live filtering
-Filter by Status	✅ Dropdown-controlled
-Total Value	✅ Auto-calculated on filter/import
-
-
-Shares the link with view permissions
---- 
 
 ### 🗂️ Project Structure
 Invexus-DMS/
