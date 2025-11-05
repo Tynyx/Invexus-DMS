@@ -1,4 +1,4 @@
-//  Invexus DMS - Validators (small, focused)
+package app.validation;//  Invexus DMS - Validators (small, focused)
 //  Author: LaTroy Richardson (CEN-3024C)
 //
 //  Purpose:
@@ -12,7 +12,6 @@
 
 
 import app.domain.AssetStatus;
-import app.validation.validators;
 import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;
@@ -44,7 +43,7 @@ class ValidatorTest {
 
     @Test
     void parseStatus_valid() {
-        assertEquals(AssetStatus.IN_REPAIR, validators.parseStatus("repair"));
+        assertEquals(AssetStatus.IN_REPAIR, validators.parseStatus("in_repair"));
     }
 
     @Test

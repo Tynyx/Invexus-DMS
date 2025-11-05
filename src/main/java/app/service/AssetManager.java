@@ -19,6 +19,8 @@ import app.repository.AssetRepository;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Locale;
+import java.util.Objects;
 import java.util.Optional;
 public class AssetManager  {
 
@@ -94,10 +96,15 @@ public class AssetManager  {
     }
 
     public BigDecimal totalInventoryValue() {
-        List<Asset> all = repo.findAll();
-        return all.stream()
-                .filter(a -> a.getStatus() != AssetStatus.RETIRED)
-                .map(a -> a.getUnitCost().multiply(BigDecimal.valueOf(a.getQuantity())))
+        return repo.findAll().stream()
+                .map(Asset::getUnitCost)
+                .filter(Objects::nonNull)
                 .reduce(BigDecimal.ZERO, BigDecimal::add);
+    }
+
+    public static AssetStatus parseStatus (String s) {
+        if ( s == null) throw new IllegalArgumentException("Status is required.");
+        String key = s.trim().toUpperCase(Locale.ROOT).replace(' ','_');
+        return AssetStatus.valueOf(key);
     }
 }
