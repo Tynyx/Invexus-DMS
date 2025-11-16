@@ -1,0 +1,8 @@
+tag,name,location,purchaseDate,unitCost,quantity,status,assigned
+AF100,Framework Laptop 13,Montevideo,2024-09-24,1299.00,1,IN_STOCK,False
+AF101,Samsung Watch Ultra,Uruguay,2023-12-02,746.50,1,ASSIGNED,True
+AF102,PS5 Controller,Gaming Room,2025-02-10,65.43,2,IN_REPAIR,False
+AF103,Netgear Switch,Office,2020-01-12,79.99,1,IN_STOCK,True
+AF104,3D Printer,Lab,2022-07-15,499.95,1,ACTIVE,False
+BAD1,Bad Money,Office,2020-01-12,abc,1,IN_STOCK,True
+BAD2,Missing Columns OnlyTwo

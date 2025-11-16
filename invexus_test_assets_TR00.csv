@@ -1,0 +1,26 @@
+tag,name,location,qty,status,unitCost,acquired,assigned
+TR00,Samsung Watch Ultra,Warehouse,1,ASSIGNED,648.99,2022-10-13,True
+TR01,Work Laptop,Warehouse,5,IN_STOCK,122.0,2023-03-24,True
+TR02,Office Mouse,HQ,5,IN_STOCK,1641.22,2025-01-21,False
+TR03,Router,Field,4,ASSIGNED,2032.1,2022-01-14,True
+TR04,Scanner,HQ West,3,IN_STOCK,576.52,2023-11-21,True
+TR05,Projector,Warehouse,4,IN_STOCK,2125.36,2023-06-26,True
+TR06,Label Printer,HQ East,5,IN_STOCK,2308.62,2022-06-11,False
+TR07,Mac Mini,Server Room,5,IN_STOCK,219.41,2023-04-12,False
+TR08,Surface Pro,Warehouse,2,REPAIR,980.31,2024-07-17,False
+TR09,Android Phone,URUGUAY,3,IN_STOCK,1690.93,2022-05-27,True
+TR10,iPad Air,Field,2,IN_STOCK,710.37,2025-02-14,True
+TR11,USB Hub,Server Room,1,IN_STOCK,127.65,2023-10-09,False
+TR12,3D Printer,Lab,1,IN_STOCK,2359.13,2023-10-07,True
+TR13,NAS Drive,HQ East,4,REPAIR,1623.99,2022-10-20,False
+TR14,Gaming Laptop,URUGUAY,2,ASSIGNED,1369.49,2025-04-12,False
+TR15,Mechanical Keyboard,HQ West,3,IN_STOCK,2492.97,2024-11-09,False
+TR16,4K Monitor,Warehouse,1,REPAIR,423.46,2022-11-24,False
+TR17,Desk Chair,Warehouse,4,IN_STOCK,2489.5,2024-12-19,False
+TR18,Conference Mic,HQ,1,ASSIGNED,1364.58,2023-07-01,False
+TR19,Webcam 4K,Warehouse,3,IN_STOCK,1160.62,2023-06-24,True
+TR20,Barcode Scanner,Warehouse,3,REPAIR,1292.77,2023-02-12,True
+TR21,POS Terminal,Server Room,2,ASSIGNED,1956.63,2024-12-22,True
+TR22,Thermal Camera,Server Room,4,IN_STOCK,2325.29,2023-09-22,True
+TR23,Drawing Tablet,HQ,2,REPAIR,2369.03,2022-06-25,False
+TR24,VR Headset,Warehouse,5,ASSIGNED,363.56,2024-08-31,True

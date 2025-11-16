@@ -1,0 +1,4 @@
+db.url=jdbc:mysql://localhost:3306/invexus_dms?useSSL=true&allowPublicKeyRetrieval=true&serverTimezone=UTC&connectionTimeZone=SERVER&characterEncoding=utf8
+db.user=invexus
+db.pass=Admin123!
+db.pool.max=5

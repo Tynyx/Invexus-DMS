@@ -5,11 +5,12 @@
 <?import javafx.geometry.Insets.*?>
 
 <?import javafx.geometry.Insets?>
-<VBox xmlns:fx="http://javafx.com/fxml"
-      fx:controller="app.ui.controllers.AssetFormController"
+<VBox xmlns="http://javafx.com/fxml"
+      xmlns:fx="http://javafx.com/fxml"
       spacing="10"
       prefWidth="400"
-      prefHeight="320">
+      prefHeight="320"
+    stylesheets="@../css/invexus.css">
     <padding>
         <Insets top="20" right="20" bottom="20" left="20"/>
     </padding>
@@ -45,11 +46,15 @@
         <!-- Acquired -->
         <Label text="Acquired:" GridPane.rowIndex="6" GridPane.columnIndex="0"/>
         <DatePicker fx:id="txtAcquired" GridPane.rowIndex="6" GridPane.columnIndex="1"/>
+
+        <!-- Assigned -->
+        <Label text="Assigned?: " GridPane.rowIndex="7" GridPane.columnIndex="0"/>
+        <CheckBox fx:id="chkAssigned" GridPane.rowIndex="7" GridPane.columnIndex="1"/>
     </GridPane>
 
 
     <HBox spacing="10" alignment="CENTER_RIGHT">
-        <Button fx:id="btnCancel" text="Cancel" onAction="#onCancel"/>
-        <Button fx:id="btnSave" text="Save" onAction="#onSave"/>
+        <Button fx:id="onCancel" text="Cancel" onAction="#onCancel"/>
+        <Button fx:id="onSave" text="Save" onAction="#onSave" defaultButton="true"/>
     </HBox>
 </VBox>

@@ -20,11 +20,25 @@ import java.math.RoundingMode;
 import java.time.DateTimeException;
 import java.time.LocalDate;
 
+/**
+ * Utility class containing parsing and validation helpers for user input.
+ * <p>
+ * All methods are static and throw {@link IllegalArgumentException} when the input
+ * is missing or invalid, so callers can surface clear messages to the user.
+ */
 public final class validators {
     private validators() {}
 
-    // This method is to validate the unitCost attribute that would be inputted by the user and kicks back anything that
-    // crash the CLI
+    /**
+     * Parses a currency amount from a string.
+     * <p>
+     * The value is trimmed, converted to a {@link BigDecimal}, ensured to be non-negative,
+     * and scaled to two decimal places using {@link java.math.RoundingMode#HALF_UP}.
+     *
+     * @param s the raw amount string entered by the user
+     * @return the parsed monetary value
+     * @throws IllegalArgumentException if the input is {@code null}, blank, non-numeric, or negative
+     */
     public static BigDecimal parseMoney(String s) {
         if (s == null || s.isBlank()) throw new IllegalArgumentException("Amount is required");
         try {
@@ -36,7 +50,17 @@ public final class validators {
         }
     }
 
-    //This method is to read and validate all inputs for both attributes purchaseDate and WarrantyEndDate
+    /**
+     * Parses a date from a flexible string format.
+     * <p>
+     * The method extracts numeric year, month, and day components from the string,
+     * allowing various separators (e.g., {@code 2024-10-31}, {@code 2024/10/31}, {@code 2024 10 31}).
+     *
+     * @param s the raw date string
+     * @return the parsed {@link LocalDate}
+     * @throws IllegalArgumentException if the input is {@code null}, blank, missing parts,
+     *                                  or cannot be converted into a valid date
+     */
     public static LocalDate parseDateFlexible(String s) {
         if (s == null || s.isBlank()) throw new IllegalArgumentException("Date is required");
         String[] parts = s.trim().split("[^0-9]+");
@@ -51,16 +75,34 @@ public final class validators {
         }
     }
 
-    //This method is make sure nothing crashes the AssetStatus attribute and tell the user how to properly use it
+    /**
+     * Parses a status string into an {@link AssetStatus}, in a case-insensitive way.
+     * <p>
+     * The string is trimmed and uppercased before lookup.
+     *
+     * @param s the raw status string
+     * @return the parsed {@link AssetStatus}
+     * @throws IllegalArgumentException if the input is {@code null}, blank, or does not match a valid status
+     */
     public static AssetStatus parseStatus(String s) {
         if (s == null || s.isBlank()) throw new IllegalArgumentException("Status is required");
         try {
             return AssetStatus.valueOf(s.toUpperCase());
         } catch (IllegalArgumentException ex) {
-            throw new IllegalArgumentException("Status must be one of: IN_STOCK, ACTIVE, IN_REPAIR, RETIRED.");
+            throw new IllegalArgumentException("Status must be one of: IN_STOCK, ASSIGNED, REPAIR, RETIRED.");
         }
     }
-    //This method is to help user use more sensible methods of using the boolean true or false to yes or no and shorthand
+
+    /**
+     * Parses a boolean value from a "loose" user-friendly string.
+     * <p>
+     * Accepts common variants such as {@code "y"}, {@code "yes"}, {@code "true"} for {@code true}
+     * and {@code "n"}, {@code "no"}, {@code "false"} for {@code false}. A {@code null} or blank
+     * string is treated as {@code false}.
+     *
+     * @param s the raw boolean-like string
+     * @return {@code true} or {@code false} based on the interpreted value
+     */
     public static boolean parseBooleanLoose(String s) {
         if (s == null || s.isBlank() ) return false;
         String t = s.trim().toLowerCase();
@@ -69,6 +111,15 @@ public final class validators {
         return Boolean.parseBoolean(t);
     }
 
+    /**
+     * Parses an integer quantity from a string, enforcing a valid range.
+     * <p>
+     * The value is trimmed, parsed as an integer, and validated to be between 1 and 999 inclusive.
+     *
+     * @param input the raw quantity string
+     * @return the parsed quantity
+     * @throws IllegalArgumentException if the input is not a number, or is outside the range 1–999
+     */
     public static int parseInt(String input) {
         try {
             int value = Integer.parseInt(input.trim());

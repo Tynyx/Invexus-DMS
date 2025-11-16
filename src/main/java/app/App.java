@@ -18,10 +18,30 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Scanner;
 
+
+/**
+ * This class is the app for the Jar files and for the terminal what would populate
+ * if you are only using the CLI view
+ */
 public class App {
     // This is main class that takes all the code and populate the results to CLI and GUI
     // for the users and does all the equations
 
+    /**
+     * Creates a new {@code App} instance.
+     * <p>
+     * This constructor exists so the default constructor has documentation
+     * for Javadoc.
+     */
+    public App() {
+        // no-op
+    }
+
+    /**
+     * the main class is the class that holds the logic and Switch method for the CLI
+     * to manage different inputs from the user
+     * @param args are not meant to be used in this class
+     */
     public static void main(String[] args) {
         // Setup users and managers
         Scanner input = new Scanner(System.in);
@@ -34,6 +54,8 @@ public class App {
         for (Asset a : importedAssets) {
             manager.add(a);
         }
+
+
 
 
 
@@ -113,7 +135,7 @@ public class App {
                     // Status with validators
                     AssetStatus status;
                     while(true) {
-                        System.out.println("Status (IN_STOCK / ACTIVE / IN_REPAIR / RETIRED): ");
+                        System.out.println("Status (IN_STOCK / ASSIGNED / REPAIR / RETIRED): ");
                         try {
                             status = validators.parseStatus(input.nextLine().trim());
                             break;
@@ -230,7 +252,7 @@ public class App {
 
                     AssetStatus newStatus = current.getStatus();
                     while (true) {
-                        System.out.print("New status (IN_STOCK / ACTIVE / IN_REPAIR / RETIRED) [" + current.getStatus() + "]: ");
+                        System.out.print("New status (IN_STOCK / ASSIGNED / REPAIR / RETIRED) [" + current.getStatus() + "]: ");
                         String s = input.nextLine().trim();
                         if (s.isEmpty()) break;
                         try { newStatus = validators.parseStatus(s); break; }

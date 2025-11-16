@@ -11,5 +11,9 @@ app\repository\AssetRepository.class
 app\ui\controllers\MainController$1.class
 app\ui\MainApp.class
 app\io\AssetFileImporter.class
+app\ui\controllers\MainController$3.class
 app\validation\validators.class
+app\db\Db.class
+app\repository\ARepoMySQL.class
 app\service\AssetManager.class
+app\config\DB.class

@@ -35,14 +35,22 @@
             <version>1.10.0</version>
         </dependency>
 
-        <!-- MySQL JDBC (LTS line to avoid the CVE warning) -->
+
         <dependency>
             <groupId>com.mysql</groupId>
             <artifactId>mysql-connector-j</artifactId>
             <version>9.1.0</version>
         </dependency>
 
-        <!-- Testing: JUnit 5 (remove JUnit 4 RELEASE/LATEST) -->
+        <dependency>
+            <groupId>com.zaxxer</groupId>
+            <artifactId>HikariCP</artifactId>
+            <version>5.1.0</version>
+        </dependency>
+
+
+
+        <!-- Testing: JUnit 5  -->
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter</artifactId>

@@ -1,0 +1,67 @@
+-J-Duser.language=
+-J-Duser.country=
+@options
+@packages
+--no-fonts
+-classpath
+'C:/Users/Latro/.m2/repository/org/openjfx/javafx-controls/22.0.2/javafx-controls-22.0.2.jar;C:/Users/Latro/.m2/repository/org/openjfx/javafx-controls/22.0.2/javafx-controls-22.0.2-win.jar;C:/Users/Latro/.m2/repository/org/openjfx/javafx-graphics/22.0.2/javafx-graphics-22.0.2.jar;C:/Users/Latro/.m2/repository/org/openjfx/javafx-graphics/22.0.2/javafx-graphics-22.0.2-win.jar;C:/Users/Latro/.m2/repository/org/openjfx/javafx-base/22.0.2/javafx-base-22.0.2.jar;C:/Users/Latro/.m2/repository/org/openjfx/javafx-base/22.0.2/javafx-base-22.0.2-win.jar;C:/Users/Latro/.m2/repository/org/openjfx/javafx-fxml/22.0.2/javafx-fxml-22.0.2.jar;C:/Users/Latro/.m2/repository/org/openjfx/javafx-fxml/22.0.2/javafx-fxml-22.0.2-win.jar;C:/Users/Latro/.m2/repository/org/apache/commons/commons-csv/1.10.0/commons-csv-1.10.0.jar;C:/Users/Latro/.m2/repository/com/mysql/mysql-connector-j/9.1.0/mysql-connector-j-9.1.0.jar;C:/Users/Latro/.m2/repository/com/google/protobuf/protobuf-java/4.26.1/protobuf-java-4.26.1.jar;C:/Users/Latro/.m2/repository/com/zaxxer/HikariCP/5.1.0/HikariCP-5.1.0.jar;C:/Users/Latro/.m2/repository/org/slf4j/slf4j-api/1.7.36/slf4j-api-1.7.36.jar'
+-encoding
+'UTF-8'
+-protected
+--release
+24
+-sourcepath
+'C:/Users/Latro/source/repos/Invexus-DMS/src/main/java'
+-author
+-bottom
+'Copyright &#169; 2025. All rights reserved.'
+-charset
+'UTF-8'
+-d
+'C:/Users/Latro/source/repos/Invexus-DMS/target/reports/apidocs'
+-docencoding
+'UTF-8'
+-doctitle
+'invexus-dms 1.0.0 API'
+-use
+-version
+-windowtitle
+'invexus-dms 1.0.0 API'
+app
+app.config
+app.db
+app.domain
+app.io
+app.repository
+app.service
+app.ui.controllers
+app.ui
+app.validation
+C:\Users\Latro\.m2\repository\org\openjfx\javafx-controls\22.0.2\javafx-controls-22.0.2.jar = 1761413658280
+C:\Users\Latro\.m2\repository\org\openjfx\javafx-controls\22.0.2\javafx-controls-22.0.2-win.jar = 1761413658142
+C:\Users\Latro\.m2\repository\org\openjfx\javafx-graphics\22.0.2\javafx-graphics-22.0.2.jar = 1761413658022
+C:\Users\Latro\.m2\repository\org\openjfx\javafx-graphics\22.0.2\javafx-graphics-22.0.2-win.jar = 1761413658348
+C:\Users\Latro\.m2\repository\org\openjfx\javafx-base\22.0.2\javafx-base-22.0.2.jar = 1761413658118
+C:\Users\Latro\.m2\repository\org\openjfx\javafx-base\22.0.2\javafx-base-22.0.2-win.jar = 1761413657972
+C:\Users\Latro\.m2\repository\org\openjfx\javafx-fxml\22.0.2\javafx-fxml-22.0.2.jar = 1761413658176
+C:\Users\Latro\.m2\repository\org\openjfx\javafx-fxml\22.0.2\javafx-fxml-22.0.2-win.jar = 1761413657998
+C:\Users\Latro\.m2\repository\org\apache\commons\commons-csv\1.10.0\commons-csv-1.10.0.jar = 1761413657972
+C:\Users\Latro\.m2\repository\com\mysql\mysql-connector-j\9.1.0\mysql-connector-j-9.1.0.jar = 1762208057310
+C:\Users\Latro\.m2\repository\com\google\protobuf\protobuf-java\4.26.1\protobuf-java-4.26.1.jar = 1762208057188
+C:\Users\Latro\.m2\repository\com\zaxxer\HikariCP\5.1.0\HikariCP-5.1.0.jar = 1762350696695
+C:\Users\Latro\.m2\repository\org\slf4j\slf4j-api\1.7.36\slf4j-api-1.7.36.jar = 1737392826601
+C:\Users\Latro\source\repos\Invexus-DMS\src\main\java = 1760067809404
+C:\Users\Latro\source\repos\Invexus-DMS\target\reports\apidocs\allclasses-index.html = 1763313185725
+C:\Users\Latro\source\repos\Invexus-DMS\target\reports\apidocs\allpackages-index.html = 1763313185733
+C:\Users\Latro\source\repos\Invexus-DMS\target\reports\apidocs\element-list = 1763313185401
+C:\Users\Latro\source\repos\Invexus-DMS\target\reports\apidocs\help-doc.html = 1763313185779
+C:\Users\Latro\source\repos\Invexus-DMS\target\reports\apidocs\index-all.html = 1763313185756
+C:\Users\Latro\source\repos\Invexus-DMS\target\reports\apidocs\index.html = 1763313185703
+C:\Users\Latro\source\repos\Invexus-DMS\target\reports\apidocs\member-search-index.js = 1763313185742
+C:\Users\Latro\source\repos\Invexus-DMS\target\reports\apidocs\module-search-index.js = 1763313185739
+C:\Users\Latro\source\repos\Invexus-DMS\target\reports\apidocs\overview-summary.html = 1763313185771
+C:\Users\Latro\source\repos\Invexus-DMS\target\reports\apidocs\overview-tree.html = 1763313185696
+C:\Users\Latro\source\repos\Invexus-DMS\target\reports\apidocs\package-search-index.js = 1763313185740
+C:\Users\Latro\source\repos\Invexus-DMS\target\reports\apidocs\search.html = 1763313185764
+C:\Users\Latro\source\repos\Invexus-DMS\target\reports\apidocs\tag-search-index.js = 1763313185744
+C:\Users\Latro\source\repos\Invexus-DMS\target\reports\apidocs\type-search-index.js = 1763313185741

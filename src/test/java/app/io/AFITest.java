@@ -22,7 +22,7 @@ public class AFITest {
 
         String content = String.join("\n",
                 "LT001,Netgear Switch,Office,2020-01-12,79.99, 4, IN_STOCK,true",
-                "LT002,PS5 Controller,Gaming,2025-02-10,65.43, 4, IN_REPAIR,false,"
+                "LT002,PS5 Controller,Gaming,2025-02-10,65.43, 4, REPAIR,false,"
         );
         Files.writeString(csv, content);
 

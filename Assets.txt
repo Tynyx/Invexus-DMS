@@ -1,21 +1,25 @@
-assetTag,name,category,purchaseDate,unitCost,status,assigned,warrantyEnd
-PR001,HP Printer,Office,2023-01-05,300.49,IN_STOCK,false,2026-01-05
-MN001,Dell Monitor,Electronics,2023-02-22,220.00,IN_STOCK,false,2028-02-22
-KB001,Mechanical Keyboard,Accessories,2024-01-10,89.99,IN_STOCK,true,2026-01-10
-MS001,Wireless Mouse,Accessories,2023-04-18,45.50,IN_STOCK,false,2025-04-18
-SD001,Samsung SSD,Storage,2024-03-25,150.00,IN_STOCK,true,2029-03-25
-RT001,WiFi Router,Networking,2022-08-12,95.00,IN_STOCK,false,2027-08-12
-SP001,Smart Speaker,Audio,2023-09-09,99.99,IN_STOCK,true,2028-09-09
-SR001,Server Rack,Hardware,2022-11-19,1750.00,IN_STOCK,true,2030-11-19
-BK001,Backup Drive,Storage,2022-04-01,125.00,IN_STOCK,false,2027-04-01
-LP001,Lenovo Laptop,Computers,2024-05-15,1150.00,IN_STOCK,true,2029-05-15
-MB001,MacBook Air,Computers,2023-10-01,1399.00,IN_STOCK,false,2028-10-01
-TB001,ThinkPad Tablet,Computers,2023-06-25,650.00,IN_STOCK,false,2028-06-25
-CP001,Canon Projector,Office,2023-12-11,480.00,IN_STOCK,true,2028-12-11
-CM001,Conference Mic,Audio,2024-02-08,210.00,IN_STOCK,true,2029-02-08
-VC001,Video Camera,Electronics,2024-01-30,899.00,IN_STOCK,false,2029-01-30
-SW001,Smart Watch,Wearables,2023-03-10,249.99,IN_STOCK,true,2028-03-10
-HD001,Hard Drive,Storage,2024-04-12,135.00,IN_STOCK,false,2029-04-12
-GF001,Graphics Card,Hardware,2024-02-28,599.99,IN_STOCK,true,2029-02-28
-KB002,Wireless Keyboard,Accessories,2023-09-21,79.00,IN_STOCK,false,2028-09-21
-CH001,Office Chair,Furniture,2022-07-17,185.00,IN_STOCK,true,2027-07-17
+001,ThinkPad T14,Office,2023-02-15,1299.00,3,IN_STOCK,false
+002,Dell OptiPlex 7000,Front Desk,2022-11-01,899.50,2,ASSIGNED,true
+003,MacBook Air M2,Remote,2024-06-20,1199.99,1,IN_STOCK,false
+004,HP LaserJet Pro M404,Print Room,2021-08-10,269.00,2,REPAIR,false
+005,Netgear GS308 Switch,Closet A,2020-03-05,24.99,6,IN_STOCK,false
+006,Logitech MX Keys,Office,2024-01-09,99.99,5,ASSIGNED,true
+007,APC UPS 1500VA,Server Room,2019-09-14,219.00,2,RETIRED,false
+008,Raspberry Pi 5,Lab,2024-10-01,79.00,10,IN_STOCK,false
+009,iPad 10th Gen,Sales,2023-03-22,449.00,4,ASSIGNED,true
+010,Samsung 27in Monitor,Office,2022-05-18,189.99,8,IN_STOCK,false
+F011,Surface Laptop 5,Executive,2023-12-02,1599.00,1,ASSIGNED,true
+F012,Cisco RV340 Router,Closet B,2021-07-07,329.00,1,REPAIR,false
+F013,Brother Label Printer,Warehouse,2020-12-12,119.99,2,IN_STOCK,false
+F014,Synology DS923+ NAS,Server Room,2024-02-29,599.99,1,IN_STOCK,false
+F015,WD Red 8TB Drive,Server Room,2024-03-01,139.99,6,IN_STOCK,false
+F016,Zebra Barcode Scanner,Warehouse,2022-09-09,179.00,3,ASSIGNED,true
+F017,Jabra Evolve2 Headset,Support,2023-01-25,149.00,5,ASSIGNED,true
+F018,Lenovo Docking Station,Office,2021-04-17,209.00,7,IN_STOCK,false
+F019,Apple TV 4K,Conference,2023-05-03,129.00,2,IN_STOCK,false
+F020,BenQ Projector,Conference,2018-10-30,549.00,1,RETIRED,false
+F021,Ubiquiti U6-Lite AP,Ceiling,2024-04-11,99.00,6,IN_STOCK,false
+F022,Cat6 Patch Cable 2m,Inventory,2024-07-19,3.49,25,IN_STOCK,false
+F023,PS5 Controller,Gaming Lab,2025-02-10,65.43,4,REPAIR,false
+F024,Samsung Watch Ultra,Field,2024-09-24,746.50,1,ASSIGNED,true
+F025,Mac Mini M2,Studio,2023-06-06,699.00,2,IN_STOCK,false

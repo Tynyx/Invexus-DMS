@@ -10,8 +10,26 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Service responsible for importing {@link app.domain.Asset} data
+ * from CSV files or CSV-formatted input.
+ */
 public class CSVAssetImporter {
 
+    /**
+     * Creates a new {@code CSVAssetImporter}.
+     * <p>
+     * This default constructor is used when importing assets from CSV data.
+     */
+    public CSVAssetImporter() {
+        // no-op
+    }
+
+    /**
+     * Import an CSV or TXT file and have display the results or kick back any errors
+     * @param filePath is the string that contains the actual filepath to the CSV/TXT
+     * @return the parsed assets that contained no errors or misinformation
+     */
     public static List<Asset> importFromCSV(String filePath) {
         List<Asset> assets = new ArrayList<>();
         try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
