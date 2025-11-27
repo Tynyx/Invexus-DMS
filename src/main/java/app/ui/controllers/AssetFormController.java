@@ -47,17 +47,18 @@ public class AssetFormController {
     @FXML
     private void initialize() {
         cmbStatus.getItems().setAll(AssetStatus.values());
-        if (editing != null) {                   // prefill for edit
+
+        if (editing != null) {              // EDIT mode
             txtTag.setText(editing.getAssetTag());
             txtName.setText(editing.getName());
             txtLocation.setText(editing.getLocation());
-            txtQty.setText(String.valueOf(editing.getQuantity()));
             txtUnitCost.setText(editing.getUnitCost().toPlainString());
+            txtQty.setText(String.valueOf(editing.getQuantity()));
             txtAcquired.setValue(editing.getPurchaseDate());
             cmbStatus.setValue(editing.getStatus());
             chkAssigned.setSelected(editing.isAssigned());
-            txtTag.setDisable(true);             // keep PK immutable
-        } else {
+            txtTag.setDisable(true);        // PK locked
+        } else {                            // ADD mode
             cmbStatus.getSelectionModel().selectFirst();
         }
     }
@@ -79,16 +80,40 @@ public class AssetFormController {
                     chkAssigned.isSelected()
             );
             boolean ok = (editing == null) ? manager.add(a) : manager.update(a);
-            close(ok);
+            if(!ok) {
+                showError("Save failed", "No rows were changed. Check that the tag exist.");
+                close(false);
+                return;
+            }
+            close(true);
         } catch (Exception ex) {
+            showError("Save Failed", ex.getMessage());
             close(false);
         }
+    }
+
+    private void showError(String header, String message) {
+        javafx.application.Platform.runLater(() -> {
+            var alert = new javafx.scene.control.Alert(javafx.scene.control.Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText(header);
+            alert.setContentText((message == null || message.isBlank()) ? "(no details)" : message);
+
+            // use any control from this dialog to find the owner window
+            var scene = (txtName != null && txtName.getScene() != null) ? txtName.getScene() : null;
+            if (scene != null && scene.getWindow() != null) {
+                alert.initOwner(scene.getWindow());
+            }
+            alert.showAndWait();
+        });
     }
 
     /**
      * Cancel and action that was about to be done for add/edit on an asset
      */
     @FXML private void onCancel() { close(false); }
+
+
 
     private void close(boolean saved) {
         if (onClose != null) onClose.accept(saved);

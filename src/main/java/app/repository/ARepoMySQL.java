@@ -2,6 +2,7 @@ package app.repository;
 
 import app.domain.Asset;
 import app.domain.AssetStatus;
+import app.ui.Ui;
 
 import javax.sql.DataSource;
 import java.sql.*;
@@ -83,7 +84,7 @@ public class ARepoMySQL implements AssetRepository {
 
     @Override
     public Optional<Asset> findByTag(String tag) {
-        final String sql = "SELECT tag, name, location, purchase_date, unit_cost, qty, status, assigned " +
+        final String sql = "SELECT tag, name, location, acquired_on, cost, quantity, status, Assigned " +
                 "FROM assets WHERE tag = ?";
         try (Connection c = ds.getConnection();
              PreparedStatement ps = c.prepareStatement(sql)) {
@@ -100,20 +101,44 @@ public class ARepoMySQL implements AssetRepository {
         final String sql =
                 "UPDATE assets SET name=?, location=?, acquired_on=?, cost=?, quantity=?, status=?, Assigned=? " +
                         "WHERE tag=?";
+
         try (Connection c = ds.getConnection();
              PreparedStatement ps = c.prepareStatement(sql)) {
 
-            ps.setString(1, a.getName());
-            ps.setString(2, a.getLocation());
-            ps.setDate  (3, a.getPurchaseDate()==null ? null : java.sql.Date.valueOf(a.getPurchaseDate()));
-            ps.setBigDecimal(4, a.getUnitCost());
-            ps.setInt   (5, a.getQuantity());
-            ps.setString(6, a.getStatus()==null ? null : a.getStatus().name());
-            ps.setBoolean(7, a.isAssigned());
-            ps.setString(8, a.getAssetTag());
+            ps.setString(1,  a.getName());
+            ps.setString(2,  a.getLocation());
 
-            return ps.executeUpdate() == 1;
-        } catch (SQLException e) { return false; }
+            // LocalDate -> SQL DATE (or NULL)
+            if (a.getPurchaseDate() == null) {
+                ps.setNull(3, java.sql.Types.DATE);
+            } else {
+                ps.setDate(3, java.sql.Date.valueOf(a.getPurchaseDate()));
+            }
+
+            ps.setBigDecimal(4, a.getUnitCost());
+            ps.setInt(5, a.getQuantity());
+
+            // enum -> VARCHAR (or NULL)
+            if (a.getStatus() == null) {
+                ps.setNull(6, java.sql.Types.VARCHAR);
+            } else {
+                ps.setString(6, a.getStatus().name());
+            }
+
+            // boolean -> TINYINT(1)
+            ps.setBoolean(7, a.isAssigned());
+
+            // WHERE tag = ?
+            ps.setString(8, a.getAssetTag().trim());   // <- trim just in case
+
+            int rows = ps.executeUpdate();
+            System.out.println("[UPDATE] tag=" + a.getAssetTag() + " rows=" + rows);
+            return rows == 1;
+        } catch (SQLException e) {
+            // surface the reason in the UI
+            Ui.error("Save failed", e.getMessage());
+            return false;
+        }
     }
 
 
@@ -129,8 +154,7 @@ public class ARepoMySQL implements AssetRepository {
 
     private Asset map(ResultSet rs) throws SQLException {
         // Guard status possibly null
-        String st = rs.getString("status");
-        AssetStatus status = (st == null || st.isBlank()) ? null : AssetStatus.valueOf(st);
+
 
         return new Asset(
                 rs.getString("tag"),
@@ -139,10 +163,12 @@ public class ARepoMySQL implements AssetRepository {
                 rs.getDate("acquired_on") == null ? null : rs.getDate("acquired_on").toLocalDate(),
                 rs.getBigDecimal("cost"),
                 rs.getInt("quantity"),
-                status,
-                rs.getBoolean("Assigned")    // 8th arg
+                AssetStatus.valueOf(rs.getString("status")),
+                rs.getBoolean("Assigned")
         );
     }
+
+
 
 
 }
