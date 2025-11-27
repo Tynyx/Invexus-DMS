@@ -2,11 +2,14 @@
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
 <BorderPane xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml"
             fx:controller="app.ui.controllers.MainController"
-            stylesheets="@../css/invexus.css">
+            stylesheets="@/css/invexus.css">
+
     <top>
-        <VBox spacing="8">
+        <VBox spacing="8" styleClass="panel">
             <MenuBar>
                 <Menu text="File">
                     <MenuItem text="Import Assets..." onAction="#onImportCSV"/>
@@ -20,10 +23,13 @@
 
             <!-- banner -->
             <HBox spacing="16" styleClass="banner" alignment="CENTER_LEFT">
-                <Label text="Invexus DMS" styleClass="title"/>
+                <ImageView fitHeight="24" preserveRatio="true">
+                    <Image url="@/img/invexus-logo.png"/>
+                </ImageView>
+                <Label styleClass="title"/>
                 <Pane HBox.hgrow="ALWAYS"/>
                 <Label text="Total Assets Value:" styleClass="metric-label"/>
-                <Label fx:id="lblTotalValue" text=" '$0.00' " styleClass="metric-value"/>
+                <Label fx:id="lblTotalValue" text=" " styleClass="metric-value"/>
             </HBox>
 
             <!-- filters / actions -->
@@ -41,17 +47,26 @@
     </top>
 
     <center>
-        <TableView fx:id="tblAssets">
-            <columns>
-                <TableColumn fx:id="colTag" text="Tag" prefWidth="100"/>
-                <TableColumn fx:id="colName" text="Name" prefWidth="100"/>
-                <TableColumn fx:id="colStatus" text="Status" prefWidth="120"/>
-                <TableColumn fx:id="colQty" text="Qty"/>
-                <TableColumn fx:id="colUnitCost" text="Unit Cost" prefWidth="120"/>
-                <TableColumn fx:id="colAcquired" text="Acquired" prefWidth="140"/>
-                <TableColumn fx:id="colLocation" text="Location" prefWidth="350"/>
-            </columns>
-        </TableView>
+        <StackPane styleClass="page">
+            <VBox alignment="TOP_CENTER" spacing="12">
+                <StackPane styleClass="card">
+                    <VBox spacing="6">
+                        <Label text="Inventory" styleClass="card-title"/>
+                        <TableView fx:id="tblAssets" prefWidth="900" maxWidth="900">
+                            <columns>
+                                <TableColumn fx:id="colTag" text="Tag" prefWidth="120"/>
+                                <TableColumn fx:id="colName" text="Name" prefWidth="220"/>
+                                <TableColumn fx:id="colStatus" text="Status" prefWidth="120"/>
+                                <TableColumn fx:id="colQty" text="Qty" prefWidth="60"/>
+                                <TableColumn fx:id="colUnitCost" text="Unit Cost" prefWidth="120"/>
+                                <TableColumn fx:id="colAcquired" text="Acquired" prefWidth="120"/>
+                                <TableColumn fx:id="colLocation" text="Location" prefWidth="220"/>
+                            </columns>
+                        </TableView>
+                    </VBox>
+                </StackPane>
+            </VBox>
+        </StackPane>
     </center>
 
     <bottom>

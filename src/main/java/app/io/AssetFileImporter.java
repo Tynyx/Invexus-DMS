@@ -15,8 +15,28 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Utility class responsible for the reading asset data from files
+ * and converting it to {@link app.domain.Asset} instances.
+ */
 public class AssetFileImporter {
 
+    /**
+     * Creates a new {@code AssetFileImporter}.
+     * <p>
+     * This default constructor is used when importing assets from files.
+     */
+    public AssetFileImporter() {
+        // no-op
+    }
+
+
+    /**
+     * Parses a CSV/TXT file into {@link Asset} rows.
+     * @param path absolute file path
+     * @return parsed assets (can be empty)
+     * @throws IOException if the file cannot be read
+     */
     public List<Asset> parseCsv(String path) throws IOException {
         List<Asset> assets = new ArrayList<>();
         Path file = Path.of(path);

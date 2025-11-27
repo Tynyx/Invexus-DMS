@@ -13,8 +13,6 @@ import org.junit.jupiter.api.Test;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
 import static org.junit.jupiter.api.Assertions.*;
 
 //Create the class to handle all the CRUD Test
@@ -78,7 +76,7 @@ class AssetManagerTest {
                 LocalDate.of(2025, 2, 10),
                 new BigDecimal("65.43"),
                 1,
-                AssetStatus.ACTIVE,
+                AssetStatus.ASSIGNED,
                 true
         );
 
@@ -92,7 +90,7 @@ class AssetManagerTest {
         assertEquals(LocalDate.of(2025, 2, 10), after.getPurchaseDate());
         assertEquals(0, new BigDecimal("65.43").compareTo(after.getUnitCost()));
         assertEquals(1, 1);
-        assertEquals(AssetStatus.ACTIVE, after.getStatus());
+        assertEquals(AssetStatus.ASSIGNED, after.getStatus());
         assertTrue(after.getAssigned());
 
     }
@@ -145,13 +143,13 @@ class AssetManagerTest {
                 new BigDecimal("79.99"), 3, AssetStatus.IN_STOCK,
                 true));
         manager.add(new Asset("A2","B","x", LocalDate.of(2020,1,1),
-                new BigDecimal("65.43"), 5, AssetStatus.IN_REPAIR,
+                new BigDecimal("65.43"), 5, AssetStatus.REPAIR,
                 false));
         manager.add(new Asset("A3","C","x", LocalDate.of(2020,1,1),
-                new BigDecimal("65.43"), 3, AssetStatus.IN_REPAIR,
+                new BigDecimal("65.43"), 3, AssetStatus.REPAIR,
                 false));
         manager.add(new Asset("A4","D", "x", LocalDate.of(2025,5,30),
-                new BigDecimal("1200.32"), 3, AssetStatus.IN_REPAIR,
+                new BigDecimal("1200.32"), 3, AssetStatus.REPAIR,
                 false));
 
         // Test to make sure the total value actually equals the total value

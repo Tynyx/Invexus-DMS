@@ -1,0 +1,51 @@
+tag,name,location,acquired_on,cost,quantity,status,Assigned
+TR00,Beelink Mini PC,Print Room,2019-04-13,1487.27,4,ASSIGNED,true
+TR01,APC UPS 1500VA,R&D,2019-12-23,1188.18,1,IN_STOCK,false
+TR02,Canon EOS R10,Field,2025-10-01,71.54,4,RETIRED,false
+TR03,Keychron K6,HQ - Room 101,2019-01-27,1521.44,3,RETIRED,false
+TR04,Samsung 27in Monitor,Lab,2022-10-10,221.38,7,IN_STOCK,false
+TR05,Lenovo Tiny M80q,Studio,2021-12-19,1617.11,12,RETIRED,false
+TR06,Logitech Brio 4K,Remote,2025-03-11,599.49,11,REPAIR,false
+TR07,Google Pixel 9,Remote,2019-07-07,1328.30,13,REPAIR,true
+TR08,Canon EOS R10,Print Room,2023-04-06,569.39,11,REPAIR,false
+TR09,Lenovo Tiny M80q,Lab,2021-12-29,1408.60,11,IN_STOCK,false
+TR10,Surface Laptop 5,R&D,2021-09-29,342.54,7,REPAIR,true
+TR11,Beelink Mini PC,R&D,2021-06-18,1374.54,14,IN_STOCK,false
+TR12,MacBook Air M2,Closet B,2023-07-02,549.13,4,REPAIR,false
+TR13,LG Gram 16,Executive,2024-02-23,301.89,3,ASSIGNED,true
+TR14,QNAP TS-464 NAS,HQ - Room 101,2025-07-22,867.30,10,RETIRED,false
+TR15,iPad 10th Gen,Field,2024-07-14,199.00,1,IN_STOCK,false
+TR16,Surface Laptop 5,Meeting Room,2025-09-08,144.78,7,RETIRED,false
+TR17,Anker PowerConf S500,Office,2020-04-14,1368.79,9,REPAIR,false
+TR18,iMac 24in M3,Print Room,2022-04-17,879.84,8,IN_STOCK,true
+TR19,Surface Pro 9,HQ - Room 101,2024-08-12,1527.69,9,IN_STOCK,true
+TR20,BenQ 24in Monitor,Field,2025-10-30,412.84,6,ASSIGNED,true
+TR21,Dell P2720D Monitor,Office,2025-09-19,660.83,1,IN_STOCK,true
+TR22,BenQ 24in Monitor,Sales,2019-08-26,495.93,10,IN_STOCK,false
+TR23,LG Gram 16,Remote,2024-12-21,1535.35,3,RETIRED,true
+TR24,Surface Laptop 5,HQ - Room 101,2024-12-01,1746.42,7,ASSIGNED,false
+TR25,Nintendo Switch OLED,Lab,2022-06-30,809.00,11,REPAIR,false
+TR26,Dell P2720D Monitor,Engineering,2020-05-10,509.85,2,REPAIR,false
+TR27,Anker PowerConf S500,Sales,2025-08-07,455.03,2,IN_STOCK,false
+TR28,MacBook Air M2,Closet B,2019-10-18,1037.03,5,RETIRED,false
+TR29,iPad 10th Gen,IT Closet,2025-06-18,954.89,13,RETIRED,false
+TR30,Brother Label Printer,Print Room,2020-02-02,1323.79,6,RETIRED,false
+TR31,Surface Pro 9,Front Desk,2020-02-08,139.01,12,REPAIR,false
+TR32,APC UPS 1500VA,Sales,2021-02-23,395.61,8,ASSIGNED,true
+TR33,Elgato Stream Deck MK2,Engineering,2021-10-20,1750.48,2,RETIRED,false
+TR34,Anker PowerConf S500,Print Room,2019-07-27,1310.25,9,IN_STOCK,true
+TR35,Nintendo Switch OLED,Sales,2020-11-12,823.70,8,ASSIGNED,false
+TR36,HP LaserJet Pro M404,Server Room,2023-04-02,23.27,7,REPAIR,true
+TR37,Wacom Intuos S,HQ - Room 102,2023-09-29,1398.25,12,RETIRED,false
+TR38,Zebra GK420d Printer,Lab,2019-08-28,1165.78,9,IN_STOCK,false
+TR39,HP LaserJet Pro M404,Front Desk,2025-07-20,963.04,15,ASSIGNED,true
+TR40,HP EliteBook 840,Remote,2021-01-31,154.67,2,ASSIGNED,true
+TR41,Shure MV7 Microphone,Sales,2025-06-29,1196.15,10,IN_STOCK,false
+TR42,Keychron K6,IT Closet,2024-11-11,645.41,5,ASSIGNED,true
+TR43,Dell Latitude 5440,Sales,2021-12-23,802.66,11,REPAIR,false
+TR44,Nintendo Switch OLED,Remote,2019-02-08,926.41,10,IN_STOCK,false
+TR45,Synology DS923+ NAS,Field,2021-12-22,281.26,6,IN_STOCK,true
+TR46,Ubiquiti UniFi AP,HQ - Room 102,2020-10-08,886.61,9,REPAIR,false
+TR47,TP‑Link TL-SG108,Field,2019-02-02,1341.37,9,REPAIR,true
+TR48,APC UPS 1500VA,Closet A,2021-12-19,247.55,2,ASSIGNED,true
+TR49,Corsair K70,Lab,2022-11-05,422.12,11,REPAIR,false

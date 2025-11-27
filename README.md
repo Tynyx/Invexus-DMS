@@ -1,132 +1,122 @@
-# Invexus DMS – Phase 1: Logic and Data Validation
+# Invexus DMS
 
-### 📦 Overview
-**Invexus DMS (Data Management System)** is a console-based Java application designed to manage company assets and demonstrate proper CRUD functionality, file parsing, and input validation.  
-This project was developed as part of the *Phase 1 Implementation* requirement for the **Valencia College BAS in Computing Technology – Software Development** coursework.
-
----
-
-### 🧠 Phase 1 Goal
-Implement the **core logic and data validation** for all CRUD operations using Java objects and text file input/output (no database or GUI yet).
-
----
-
-### ⚙️ Features Implemented
-| Feature | Description |
-|----------|--------------|
-| **Create** | Add a new asset through the CLI with full validation. |
-| **Read** | List all assets and import asset lists from `.txt` files. |
-| **Update** | Modify any field of an existing asset with validation checks. |
-| **Delete** | Remove an asset safely by its unique tag. |
-| **Custom Action** | Calculates and displays the total inventory value of all stored assets. |
-| **Validation** | Ensures no invalid data, malformed input, or duplicate tags crash the system. |
-
----
-
-## Phase 2 — Software Testing (JUnit 5)
-
-**Owner:** LaTroy Richardson (CEN-3024C)  
-**What I tested:** All CRUD operations, file open/import, and the custom action (Total Inventory Value).
-
-### What this phase does (plain talk)
-- I wrote JUnit 5 tests under `src/test/java` that hit my service layer (`AssetManager`) and the file importer.
-- Positive and negative cases are included so bad inputs are handled instead of crashing.
-
-### Test coverage
-- **Add**: saves a new asset; duplicate tag returns `false` and does not create a second record.
-- **Update**: updates an existing asset and returns `true`; missing tag returns `false`.
-- **Delete**: removes by tag and returns `true`; blank/missing tag returns `false`.
-- **List/Display**: `listAll()` returns the expected size/contents (no reliance on println).
-- **Open a File**: importer loads a valid CSV; bad path throws/returns an error and the program continues.
-- **Custom Action**: `totalInventoryValue()` equals the sum of unit costs in the repository.
-
-### How to run tests
-- IntelliJ: right-click `src/test/java` → **Run 'All Tests'**  
-- Or run individual test classes (gutter play icons).
-
-### Notes
-- Phase 2 is CLI + files only (no database).
-- The importer uses validators to skip bad rows and print why they were skipped (for the grader to see).
-- Videos show both passing and failing cases per the rubric.
-- 
----
-
-### 🗂️ Project Structure
-Invexus-DMS/
-│
-├── pom.xml                         # Maven config (JavaFX + dependencies)
-├── README.md                       # Clean project overview & usage (Phase 3)
-├── .gitignore                      # Ignores target/, *.class, etc.
-│
-├── src/
-│   └── main/
-│       ├── java/
-│       │   └── app/
-│       │       ├── App.java                         # Launcher class (JavaFX)
-│       │
-│       │       ├── domain/
-│       │       │   └── Asset.java                   # Asset class (POJO)
-│       │       │   └── AssetStatus.java             # Enum for asset status
-│       │
-│       │       ├── repository/
-│       │       │   └── AssetRepository.java         # Interface for asset repo
-│       │       │   └── InMemoryAssetRepository.java # Concrete in-memory impl
-│       │
-│       │       ├── service/
-│       │       │   └── AssetManager.java            # Core logic for add/edit/delete/search
-│       │
-│       │       ├── io/
-│       │       │   └── AssetFileImporter.java       # CSV file parsing with validation
-│       │
-│       │       └── ui/
-│       │           └── controllers/
-│       │               ├── MainController.java      # Handles GUI logic
-│       │               └── AssetFormController.java # Modal form for Add/Edit
-│       │
-│       └── resources/
-│           └── ui/
-│               ├── main_view.fxml                  # Main window layout
-│               └── asset_form.fxml                 # Asset input modal
-│           └── css/
-│               └── style.css                      # Invexus green/blue theme
-│
-└── target/                          # Compiled bytecode (ignored in Git)
+**Team and Roles:**
+* LaTroy Richardson Sr - Lead Developer and Project Documentation Manager
 
 
----
+**Invexus DMS** – Track Smarter. Manage Better.
 
-### 🧩 How to Run
-**Option 1: From IntelliJ / IDE**
-1. Open the project.
-2. Run the main class: `app.App`.
-
-**Option 2: From Terminal**
-1. Build the JAR file:  
-   `Build → Build Artifacts → Invexus_DMS_jar → Build`
-2. Navigate to the JAR folder:  
-   `cd out/artifacts/Invexus_DMS_jar`
-3. Run the program:  
-   ```bash
-   java -jar Invexus_DMS.jar
-
-🧮 Custom Action
-
-Total Inventory Value – Summation of all asset costs currently stored in the system.
-
-🧰 Technologies Used
-
-Java 17+
-
-IntelliJ IDEA
-
-Command-Line Interface (CLI)
-
-java.time, BigDecimal, Collections, and Streams
+Invexus DMS (Data Management System) is a Java / JavaFX desktop application for managing business and IT assets such as laptops, monitors, servers, and peripherals. It supports in-memory storage for quick testing and optional MySQL persistence for real-world scenarios.
 
 
-👨🏽‍💻 Author
 
-LaTroy Richardson (Tynyx / NyameDrift)
-📍 Montevideo, Uruguay | Orlando, Florida
-🎓 BAS – Computing Technology & Software Development
-🔗 GitHub: github.com/Tynyx
+## Design
+
+- [Architecture Overview](docs/Architecture.md)
+- [UI & Flow](docs/UI.md)
+- [Data Model](docs/DataModel.md)
+- [Test Plan](docs/TestPlan.md)
+
+> _Note:_ These docs reflect the overall system design, including the CLI → GUI evolution, layered architecture, and testing strategy.
+
+
+
+## Built With
+
+<a href="https://www.java.com/">
+  <img src="https://upload.wikimedia.org/wikipedia/en/3/30/Java_programming_language_logo.svg" alt="Java" width="120"/>
+</a>
+
+<a href="https://openjfx.io/">
+  <img src="https://upload.wikimedia.org/wikipedia/en/f/fd/JavaFX_Logo.png" alt="JavaFX" width="150"/>
+</a>
+
+<a href="https://maven.apache.org/">
+  <img src="https://maven.apache.org/images/maven-logo-black-on-white.png" alt="Maven" width="200"/>
+</a>
+
+<a href="https://www.mysql.com/">
+  <img src="https://www.mysql.com/common/logos/logo-mysql-170x115.png" alt="MySQL" width="150"/>
+</a>
+
+<a href="https://junit.org/">
+  <img src="https://junit.org/junit5/assets/img/junit5-logo.png" alt="JUnit" width="150"/>
+</a>
+
+
+
+## Intended Users
+
+Invexus DMS is designed for:
+
+* **Small IT Teams / Help Desks:** Track laptops, monitors, docks, and other hardware assigned to employees or workstations.
+* **Computer Labs & Training Rooms:** Keep up with shared equipment, where it is, and whether it’s in use or in repair.
+* **Small Businesses & Home Offices:** Maintain a lightweight inventory of assets without needing a full-blown enterprise system.
+
+The goal is to provide a **simple, focused** inventory and asset tracker that can grow from a classroom project into a practical, real-world tool.
+
+
+
+## Functionality
+
+* **Asset Management (CRUD)**
+   * Add new assets with fields:
+      * `assetTag` (unique ID)
+      * `name`
+      * `location`
+      * `purchaseDate`
+      * `unitCost`
+      * `quantity`
+      * `status` (`IN_STOCK`, `ASSIGNED`, `REPAIR`, `RETIRED`)
+      * `assigned` (true/false)
+   * Edit existing assets and save changes back to the repository
+   * Delete assets by tag
+
+* **JavaFX UI**
+   * Table view showing all assets
+   * Location displayed alongside other core attributes
+   * Add / Edit / Delete buttons
+   * Filters by status and tag/search text
+   * UI refreshes automatically after every change
+
+* **CSV / File Import**
+   * Import assets from CSV or text files
+   * Validates:
+      * Money format (`unitCost`)
+      * Flexible date formats (`purchaseDate`)
+      * Quantity ranges
+      * Status values (mapping to `AssetStatus`)
+      * Boolean values for `assigned` (supports yes/no, y/n, true/false)
+   * Skips duplicates based on `assetTag` instead of crashing
+
+* **Reporting / Metrics**
+   * Calculate **total inventory value** across all assets (`unitCost * quantity`)
+
+* **Multiple Storage Options**
+   * In-memory repository (`InMemoryAssetRepository`) for quick testing and demos
+   * MySQL-backed repository (`ARepoMySQL`) for persistent storage
+
+
+
+## Install Extensions (Optional but Helpful)
+
+If you are working in VS Code or IntelliJ, the following extensions / tools are recommended:
+
+-   Checkstyle or similar Java linter/formatter
+-   Lombok plugin (if you extend the project to use Lombok)
+-   Java and JavaFX support plugins for your IDE
+
+
+
+## Java & Maven Setup (Local Development)
+
+Make sure you have:
+
+- Java JDK 17 or higher
+- Maven 3.x
+
+From the project root:
+
+```bash
+mvn -version
+java -version

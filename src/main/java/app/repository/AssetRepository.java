@@ -22,15 +22,44 @@ import java.util.Optional;
 // - delete(String assetTag): Removes an asset by tag and returns true or false depending on success.
 // - searchByName(String keyword): Searches asset names and returns a list of anything that matches.
 
-
+/**
+ * Persistence boundary for assets.
+ */
 public interface AssetRepository {
 
-    Asset save(Asset asset);
+    /**
+     * Inserts a new asset. Duplicates tags are rejected
+     * @param a asset to save
+     * @return {@code null} if one row was inserted
+     */
+    boolean save(Asset a);
 
+
+    /**
+     * Fetches a specific asset by tag
+     * @param assetTag is used to find the specific asset by primary key
+     * @return optional asset
+     */
     Optional<Asset> findByTag(String assetTag);
 
+    /**
+     * Fetches all assets ordered by tag.
+     * @return list of rows (never {@code null})
+     */
     List<Asset> findAll();
 
+    /**
+     * Edit a specific asset located by its tag
+     * @param a asset with fields to update
+     * @return {@code true} if one row was updated.
+     */
+    boolean update(Asset a);
+
+    /**
+     * Deletes an asset by tag
+     * @param assetTag the asset primary key
+     * @return {@code true} if one row was deleted
+     */
     boolean delete(String assetTag);
 
 

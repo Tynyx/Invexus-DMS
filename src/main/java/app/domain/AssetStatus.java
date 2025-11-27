@@ -7,12 +7,22 @@
 
 package app.domain;
 
+/**
+ * Represents the lifecycle/status of an asset within the inventory system.
+ */
 public enum AssetStatus {
-    // created a nested enum so status can utilize it for each asset
-        IN_STOCK,
-        ACTIVE,
-        IN_REPAIR,
-        RETIRED
 
+    /** Asset is available in storage and not currently assigned. */
+    IN_STOCK,
+
+    /** Asset is currently assigned to a user, workstation, or location. */
+    ASSIGNED,
+
+    /** Asset is under repair or maintenance and not available for normal use. */
+    REPAIR,
+
+    /** Asset has been permanently retired from use. */
+    RETIRED
 }
+
 

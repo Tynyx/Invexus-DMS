@@ -2,115 +2,123 @@ package app.ui.controllers;
 
 import app.domain.Asset;
 import app.domain.AssetStatus;
+import app.service.AssetManager;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.TextField;
-import javafx.stage.Modality;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
 
 import java.math.BigDecimal;
-import java.time.LocalDate;
-import java.time.format.DateTimeParseException;
+import java.util.function.Consumer;
 
+/**
+ * Controller for the asset add/edit modal. Validates user input and persists through
+ * {@link app.service.AssetManager}.
+ */
 public class AssetFormController {
+    private final AssetManager manager;
+    private final Asset editing;                 // null => Add
+    private final Consumer<Boolean> onClose;     // callback to parent
 
-    @FXML private DatePicker txtAcquired;
-    @FXML private TextField txtLocation;
-    @FXML private TextField txtTag;
-    @FXML private TextField txtName;
-    @FXML private TextField txtQty;
-    @FXML private TextField txtUnitCost;
-    @FXML private ComboBox<AssetStatus> cmbStatus;
+    // >>> constructor used by controllerFactory
 
-
-    private Asset working;
-    private boolean saved = false;
-
-    @FXML
-    public void initialize() {
-        cmbStatus.getItems().setAll(AssetStatus.values());
+    /**
+     * Creates a controller for the asset form dialog.
+     * @param manager the asset manager used to persist changes
+     * @param editing the asset editing phase when editing
+     * @param onClose the window used to display what happens on close
+     */
+    public AssetFormController(AssetManager manager,
+                               Asset editing,
+                               Consumer<Boolean> onClose) {
+        this.manager  = manager;
+        this.editing  = editing;
+        this.onClose  = onClose;
     }
 
-    public void setAsset(Asset a) {
-        this.working = a == null ? null : a.copy();
+    // FXML fields
+    @FXML private TextField txtTag, txtName, txtLocation, txtQty, txtUnitCost;
+    @FXML private DatePicker txtAcquired;
+    @FXML private ComboBox<AssetStatus> cmbStatus;
+    @FXML private CheckBox chkAssigned;
 
-        if (a != null) {
-            txtTag.setText(a.getAssetTag());
-            txtName.setText(a.getName());
-            txtLocation.setText(a.getLocation());
-            txtUnitCost.setText(a.getUnitCost().toPlainString());
-            txtQty.setText(String.valueOf(a.getQuantity()));
-            txtAcquired.setValue(a.getPurchaseDate());
-            cmbStatus.setValue(a.getStatus());
-           
-        } else {
+    /**
+     * Prefills form fields in edit mode and populates status choices.
+     */
+    @FXML
+    private void initialize() {
+        cmbStatus.getItems().setAll(AssetStatus.values());
+
+        if (editing != null) {              // EDIT mode
+            txtTag.setText(editing.getAssetTag());
+            txtName.setText(editing.getName());
+            txtLocation.setText(editing.getLocation());
+            txtUnitCost.setText(editing.getUnitCost().toPlainString());
+            txtQty.setText(String.valueOf(editing.getQuantity()));
+            txtAcquired.setValue(editing.getPurchaseDate());
+            cmbStatus.setValue(editing.getStatus());
+            chkAssigned.setSelected(editing.isAssigned());
+            txtTag.setDisable(true);        // PK locked
+        } else {                            // ADD mode
             cmbStatus.getSelectionModel().selectFirst();
         }
     }
 
-
-
-
-    @FXML private void onCancel() {
-        close(false);
-    }
-
-    @FXML private void onSave() {
+    /**
+     * Validates and saves the asset form.
+     */
+    @FXML
+    private void onSave() {
         try {
-            String name = txtName.getText().trim();
-            String tag = txtTag.getText().trim();
-            String location = txtLocation.getText().trim();
-            BigDecimal unit = new BigDecimal(txtUnitCost.getText().trim());
-            int qty = Integer.parseInt(txtQty.getText().trim());
-
-
-            LocalDate date = txtAcquired.getValue();
-            Asset newAsset = new Asset(
-                    tag,
-                    name,
-                    location,
-                    date,
-                    unit,
-                    qty,
+            var a = new Asset(
+                    txtTag.getText().trim(),
+                    txtName.getText().trim(),
+                    txtLocation.getText().trim(),
+                    txtAcquired.getValue(),
+                    new BigDecimal(txtUnitCost.getText().trim()),
+                    Integer.parseInt(txtQty.getText().trim()),
                     cmbStatus.getValue(),
-                    false
-
+                    chkAssigned.isSelected()
             );
-
-            this.working = newAsset;
-
-
+            boolean ok = (editing == null) ? manager.add(a) : manager.update(a);
+            if(!ok) {
+                showError("Save failed", "No rows were changed. Check that the tag exist.");
+                close(false);
+                return;
+            }
             close(true);
-        } catch (Exception e) {
-            e.printStackTrace(); // or you can add error popups later
+        } catch (Exception ex) {
+            showError("Save Failed", ex.getMessage());
+            close(false);
         }
     }
+
+    private void showError(String header, String message) {
+        javafx.application.Platform.runLater(() -> {
+            var alert = new javafx.scene.control.Alert(javafx.scene.control.Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText(header);
+            alert.setContentText((message == null || message.isBlank()) ? "(no details)" : message);
+
+            // use any control from this dialog to find the owner window
+            var scene = (txtName != null && txtName.getScene() != null) ? txtName.getScene() : null;
+            if (scene != null && scene.getWindow() != null) {
+                alert.initOwner(scene.getWindow());
+            }
+            alert.showAndWait();
+        });
+    }
+
+    /**
+     * Cancel and action that was about to be done for add/edit on an asset
+     */
+    @FXML private void onCancel() { close(false); }
+
+
 
     private void close(boolean saved) {
-        this.saved = saved;
-        ((Stage) txtName.getScene().getWindow()).close();
+        if (onClose != null) onClose.accept(saved);
+        ((Stage) txtTag.getScene().getWindow()).close();
     }
 
 
-
-    public static Asset showDialog(Asset existing) {
-        try {
-            FXMLLoader loader = new FXMLLoader(AssetFormController.class.getResource("/ui/asset_form.fxml"));
-            Stage stage = new Stage();
-            stage.initModality(Modality.APPLICATION_MODAL);
-            stage.setTitle(existing == null ? "Add Asset" : "Edit Asset");
-            stage.setScene(new Scene(loader.load()));
-            AssetFormController c = loader.getController();
-            c.setAsset(existing);
-            stage.showAndWait();
-            return c.saved ? c.working : null;
-        } catch (Exception e) {
-            e.printStackTrace();
-            return null;
-        }
-    }
 }

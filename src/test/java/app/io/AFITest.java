@@ -1,19 +1,14 @@
 package app.io;
 
 import app.domain.Asset;
-import app.domain.AssetStatus;
-import app.io.AssetFileImporter;
-import app.repository.InMemoryAssetRepository;
-import app.service.AssetManager;
+
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
 
 import java.io.IOException;
-import java.math.BigDecimal;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.time.LocalDate;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -26,8 +21,8 @@ public class AFITest {
         Path csv = tmp.resolve("assets.csv");
 
         String content = String.join("\n",
-                "LT001,Netgear Switch,Office,2020-01-12,79.99,IN_STOCK,true,2030-01-12",
-                "LT002,PS5 Controller,Gaming,2025-02-10,65.43,IN_REPAIR,false,2025-09-10"
+                "LT001,Netgear Switch,Office,2020-01-12,79.99, 4, IN_STOCK,true",
+                "LT002,PS5 Controller,Gaming,2025-02-10,65.43, 4, REPAIR,false,"
         );
         Files.writeString(csv, content);
 
@@ -47,10 +42,10 @@ public class AFITest {
     void skipBadLines() throws IOException {
         Path csv = tmp.resolve("mixed.csv");
         String content = String.join("\n",
-                "LT001,Good,Office,2020-01-12,79.99,IN_STOCK,true,2030-01-12",
-                "BADLINE,MissingColumns,OnlyTwo", // too short → skipped
+                "LT001,Good,Office,2020-01-12,79.99, 4, IN_STOCK,true",
+                "BAD LINE,MissingColumns,OnlyTwo", // too short → skipped
                 "LT003,BadMoney,Office,2020-01-12,abc,IN_STOCK,true,2030-01-12", // invalid money → skipped
-                "LT004,Good2,Office,2020-01-12,10.00,IN_STOCK,false,2030-01-12"
+                "LT004,Good2,Office,2020-01-12,10.00, 1, IN_STOCK,false,"
         );
         Files.writeString(csv, content);
 
@@ -60,4 +55,6 @@ public class AFITest {
         assertTrue(assets.stream().anyMatch(a -> a.getAssetTag().equals("LT001")));
         assertTrue(assets.stream().anyMatch(a -> a.getAssetTag().equals("LT004")));
     }
+
+
 }

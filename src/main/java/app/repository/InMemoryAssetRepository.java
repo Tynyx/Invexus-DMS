@@ -25,28 +25,61 @@ import app.domain.Asset;
 
 import java.util.*;
 
+/**
+ * Simple in-memory implementation of {@link AssetRepository} backed by a {@link java.util.Map}.
+ * <p>
+ * This repository is primarily intended for testing and non-persistent use.
+ */
 public class InMemoryAssetRepository implements AssetRepository {
 
     private final Map<String, Asset> store = new LinkedHashMap<>();
 
-    // returns a list of all assets currently in the map
+    /**
+     * Creates a new in-memory asset repository with an empty store.
+     */
+    public InMemoryAssetRepository() {
+        // store is already initialized at field declaration
+    }
+
+    /**
+     * return all assets currently stored in memory.
+     * @return a new list containing every asset in the repository
+     */
     @Override
     public List<Asset> findAll() {
         return new ArrayList<>(store.values());
     }
 
-    // Adds or update an asset in the map using its tags as the key, then returns that same asset.
+
+    /**
+     * Updates an existing asset in the repository
+     * @param a asset with fields to update
+     * @return True if the asset was found and updated, else False
+     */
     @Override
-    public Asset save(Asset asset) {
-
-        // if the store does not contain this keyiD already then go ahead and save it.
-            if (asset == null || asset.getStatus() == null) throw new IllegalArgumentException("Asset or tag is required");
-            store.put(asset.getAssetTag(), asset);
-
-            return asset;
+    public boolean update(Asset a) {
+        return false;
     }
 
-    //Looks for an asset by tag and if its found it will populate if not it will not populate
+    /**
+     * take a new asset and save it
+     * @param a asset to save
+     * @return {@code true} if asset tag is unique, {@code false} if already stored
+     */
+    @Override
+    public boolean save(Asset a) {
+
+        // if the store does not contain this keyiD already then go ahead and save it.
+            if (a == null || a.getStatus() == null) throw new IllegalArgumentException("Asset or tag is required");
+            store.put(a.getAssetTag(), a);
+        return true;
+    }
+
+    /**
+     * search for an specific asset by it tag
+     * @param assetTag is used to find the specific asset by primary key
+     * @return {@code optional} if tag is found, {@code optional} if not found or null
+     */
     @Override
     public Optional<Asset> findByTag(String assetTag) {
         if (assetTag == null || assetTag.isBlank()) {
@@ -55,7 +88,11 @@ public class InMemoryAssetRepository implements AssetRepository {
         return Optional.ofNullable(store.get(assetTag));
     }
 
-    // Removes the asset with that tag, returns true if its exited, false otherwise
+    /**
+     * Deletes a assetTag by searching for its priamery key
+     * @param assetTag the asset primary key
+     * @return {@code true} if assettag is found and deleted, {@code false} if not found or deleted
+     */
     @Override
     public boolean delete(String assetTag) {
         return store.remove(assetTag) != null;
