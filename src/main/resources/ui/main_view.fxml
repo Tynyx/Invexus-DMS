@@ -26,7 +26,7 @@
                 <ImageView fitHeight="24" preserveRatio="true">
                     <Image url="@/img/invexus-logo.png"/>
                 </ImageView>
-                <Label text="Invexus DMS" styleClass="title"/>
+                <Label styleClass="title"/>
                 <Pane HBox.hgrow="ALWAYS"/>
                 <Label text="Total Assets Value:" styleClass="metric-label"/>
                 <Label fx:id="lblTotalValue" text=" " styleClass="metric-value"/>
