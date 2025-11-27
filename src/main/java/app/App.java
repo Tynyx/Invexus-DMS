@@ -224,14 +224,33 @@ public class App {
                         catch (IllegalArgumentException ex) {System.out.println(ex.getMessage());}
                     }
 
-                    int newQuantity = input.nextInt() - 1;
+                    int newQuantity = current.getQuantity();   // keep existing as default
+
                     while (true) {
                         System.out.print("New quantity [" + newQuantity + "]: ");
                         String s = input.nextLine().trim();
-                        if (s.isEmpty()) break;
+
+                        // Empty input = keep current quantity
+                        if (s.isEmpty()) {
+                            break;
+                        }
+
+                        try {
+                            int q = Integer.parseInt(s);   // or validators.parseQuantity(s) if you have one
+                            if (q < 0) {
+                                System.out.println("Quantity must be zero or positive.");
+                                continue;
+                            }
+                            newQuantity = q;
+                            break;                         // valid, exit loop
+                        } catch (NumberFormatException ex) {
+                            System.out.println("Invalid quantity. Please enter a whole number.");
+                        }
                     }
 
-                    String relocation = input.nextLine().trim();
+                    current.setQuantity(newQuantity);
+
+                    String relocation = current.getLocation();
                     while (true) {
                         System.out.print("New location [" + relocation + "]: ");
                         String s = input.nextLine().trim();

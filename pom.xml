@@ -71,6 +71,7 @@
                 </configuration>
             </plugin>
 
+
             <!-- Run JUnit 5 tests -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -78,6 +79,19 @@
                 <version>3.2.5</version>
                 <configuration>
                     <useModulePath>false</useModulePath>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>3.4.1</version>
+                <configuration>
+                    <archive>
+                        <manifest>
+                            <mainClass>app.App</mainClass>
+                        </manifest>
+                    </archive>
                 </configuration>
             </plugin>
 

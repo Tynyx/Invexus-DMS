@@ -85,11 +85,20 @@ public final class validators {
      * @throws IllegalArgumentException if the input is {@code null}, blank, or does not match a valid status
      */
     public static AssetStatus parseStatus(String s) {
-        if (s == null || s.isBlank()) throw new IllegalArgumentException("Status is required");
+        if (s == null || s.isBlank()) {
+            throw new IllegalArgumentException("Status is required");
+        }
+
+        String normalized = s.trim()
+                .toUpperCase()
+                .replace(' ', '_'); // key line
+
         try {
-            return AssetStatus.valueOf(s.toUpperCase());
+            return AssetStatus.valueOf(normalized);
         } catch (IllegalArgumentException ex) {
-            throw new IllegalArgumentException("Status must be one of: IN_STOCK, ASSIGNED, REPAIR, RETIRED.");
+            throw new IllegalArgumentException(
+                    "Status must be one of: IN_STOCK, ASSIGNED, REPAIR, RETIRED."
+            );
         }
     }
 

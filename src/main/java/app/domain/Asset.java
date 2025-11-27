@@ -30,7 +30,7 @@ public class Asset {
     private BigDecimal unitCost;
     private final AssetStatus status;
     private boolean assigned;
-    private LocalDate warrantyEnd;
+
     private int quantity;
 
     @Override
@@ -175,9 +175,10 @@ public class Asset {
                 ", category='" + location + '\'' +
                 ", purchaseDate=" + purchaseDate +
                 ", unitCost=" + unitCost +
+                ", quantity=" + quantity +
                 ", status='" + status + '\'' +
                 ", assigned=" + assigned +
-                ", warrantyEnd=" + warrantyEnd +
+
                 '}';
     }
 
@@ -194,4 +195,7 @@ public class Asset {
     }
 
 
+    public void setQuantity(int newQuantity) {
+        this.quantity = newQuantity;
+    }
 }
