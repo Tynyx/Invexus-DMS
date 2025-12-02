@@ -23,8 +23,8 @@
 
             <!-- banner -->
             <HBox spacing="16" styleClass="banner" alignment="CENTER_LEFT">
-                <ImageView fitHeight="24" preserveRatio="true">
-                    <Image url="@/img/invexus-logo.png"/>
+                <ImageView fitHeight="64" preserveRatio="true">
+                    <Image url="@/img/Picture1.png"/>
                 </ImageView>
                 <Label styleClass="title"/>
                 <Pane HBox.hgrow="ALWAYS"/>
