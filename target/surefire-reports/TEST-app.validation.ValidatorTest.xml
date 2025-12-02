@@ -15,7 +15,7 @@
     <property name="sun.java.launcher" value="SUN_STANDARD"/>
     <property name="user.country" value="US"/>
     <property name="sun.boot.library.path" value="C:\Program Files\Java\jdk-24\bin"/>
-    <property name="sun.java.command" value="C:\Users\Latro\AppData\Local\Temp\surefire15390401246719802099\surefirebooter-20251127163059564_3.jar C:\Users\Latro\AppData\Local\Temp\surefire15390401246719802099 2025-11-27T16-30-59_405-jvmRun1 surefire-20251127163059564_1tmp surefire_0-20251127163059564_2tmp"/>
+    <property name="sun.java.command" value="C:\Users\Latro\AppData\Local\Temp\surefire11229186278047591300\surefirebooter-20251127164927728_3.jar C:\Users\Latro\AppData\Local\Temp\surefire11229186278047591300 2025-11-27T16-49-27_563-jvmRun1 surefire-20251127164927728_1tmp surefire_0-20251127164927728_2tmp"/>
     <property name="jdk.debug" value="release"/>
     <property name="surefire.test.class.path" value="C:\Users\Latro\source\repos\Invexus-DMS\target\test-classes;C:\Users\Latro\source\repos\Invexus-DMS\target\classes;C:\Users\Latro\.m2\repository\org\openjfx\javafx-controls\22.0.2\javafx-controls-22.0.2.jar;C:\Users\Latro\.m2\repository\org\openjfx\javafx-controls\22.0.2\javafx-controls-22.0.2-win.jar;C:\Users\Latro\.m2\repository\org\openjfx\javafx-graphics\22.0.2\javafx-graphics-22.0.2.jar;C:\Users\Latro\.m2\repository\org\openjfx\javafx-graphics\22.0.2\javafx-graphics-22.0.2-win.jar;C:\Users\Latro\.m2\repository\org\openjfx\javafx-base\22.0.2\javafx-base-22.0.2.jar;C:\Users\Latro\.m2\repository\org\openjfx\javafx-base\22.0.2\javafx-base-22.0.2-win.jar;C:\Users\Latro\.m2\repository\org\openjfx\javafx-fxml\22.0.2\javafx-fxml-22.0.2.jar;C:\Users\Latro\.m2\repository\org\openjfx\javafx-fxml\22.0.2\javafx-fxml-22.0.2-win.jar;C:\Users\Latro\.m2\repository\org\apache\commons\commons-csv\1.10.0\commons-csv-1.10.0.jar;C:\Users\Latro\.m2\repository\com\mysql\mysql-connector-j\9.1.0\mysql-connector-j-9.1.0.jar;C:\Users\Latro\.m2\repository\com\google\protobuf\protobuf-java\4.26.1\protobuf-java-4.26.1.jar;C:\Users\Latro\.m2\repository\com\zaxxer\HikariCP\5.1.0\HikariCP-5.1.0.jar;C:\Users\Latro\.m2\repository\org\slf4j\slf4j-api\1.7.36\slf4j-api-1.7.36.jar;C:\Users\Latro\.m2\repository\org\junit\jupiter\junit-jupiter\5.10.2\junit-jupiter-5.10.2.jar;C:\Users\Latro\.m2\repository\org\junit\jupiter\junit-jupiter-api\5.10.2\junit-jupiter-api-5.10.2.jar;C:\Users\Latro\.m2\repository\org\opentest4j\opentest4j\1.3.0\opentest4j-1.3.0.jar;C:\Users\Latro\.m2\repository\org\junit\platform\junit-platform-commons\1.10.2\junit-platform-commons-1.10.2.jar;C:\Users\Latro\.m2\repository\org\apiguardian\apiguardian-api\1.1.2\apiguardian-api-1.1.2.jar;C:\Users\Latro\.m2\repository\org\junit\jupiter\junit-jupiter-params\5.10.2\junit-jupiter-params-5.10.2.jar;C:\Users\Latro\.m2\repository\org\junit\jupiter\junit-jupiter-engine\5.10.2\junit-jupiter-engine-5.10.2.jar;C:\Users\Latro\.m2\repository\org\junit\platform\junit-platform-engine\1.10.2\junit-platform-engine-1.10.2.jar;"/>
     <property name="sun.cpu.endian" value="little"/>
@@ -30,7 +30,7 @@
     <property name="line.separator" value="&#10;"/>
     <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
     <property name="java.specification.name" value="Java Platform API Specification"/>
-    <property name="surefire.real.class.path" value="C:\Users\Latro\AppData\Local\Temp\surefire15390401246719802099\surefirebooter-20251127163059564_3.jar"/>
+    <property name="surefire.real.class.path" value="C:\Users\Latro\AppData\Local\Temp\surefire11229186278047591300\surefirebooter-20251127164927728_3.jar"/>
     <property name="user.script" value=""/>
     <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
     <property name="java.runtime.version" value="24.0.2+12-54"/>
@@ -61,8 +61,8 @@
   <testcase name="parseMoney_valid" classname="app.validation.ValidatorTest" time="0.0"/>
   <testcase name="parseStatus_valid" classname="app.validation.ValidatorTest" time="0.001"/>
   <testcase name="parseDate_valid" classname="app.validation.ValidatorTest" time="0.0"/>
-  <testcase name="parseDate_invalid" classname="app.validation.ValidatorTest" time="0.001"/>
+  <testcase name="parseDate_invalid" classname="app.validation.ValidatorTest" time="0.0"/>
   <testcase name="parseBooleanLoose_cases" classname="app.validation.ValidatorTest" time="0.0"/>
-  <testcase name="parseMoney_invalid" classname="app.validation.ValidatorTest" time="0.0"/>
+  <testcase name="parseMoney_invalid" classname="app.validation.ValidatorTest" time="0.001"/>
   <testcase name="parseStatus_invalid" classname="app.validation.ValidatorTest" time="0.001"/>
 </testsuite>
