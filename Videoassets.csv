@@ -1,0 +1,21 @@
+Tag,Name,Location,Qty,Status,UnitCost,Acquired,Assigned
+ST001,ST-Laptop Cart Alpha,Lab A,8,IN_STOCK,1299.00,2023-02-15,false
+ST002,ST-Dev Workstation,Office 1,3,ASSIGNED,1799.99,2024-01-10,true
+ST003,ST-Conference Monitor,Meeting Room,2,IN_STOCK,449.50,2022-11-05,false
+ST004,ST-Network Switch Rack,Server Room,5,IN_STOCK,699.00,2021-08-20,false
+ST005,ST-Loaner Chromebook Cart,Library,25,ASSIGNED,259.99,2023-09-01,true
+ST006,ST-Color Laser Printer,Print Room,1,REPAIR,399.00,2020-06-30,false
+ST007,ST-Helpdesk Laptop,Front Desk,4,ASSIGNED,999.99,2024-03-18,true
+ST008,ST-Backup NAS Array,Closet B,1,IN_STOCK,2199.00,2022-04-12,false
+ST009,ST-Training Tablet Set,Training Room,15,RETIRED,199.99,2019-10-05,false
+ST010,ST-Engineering Ultrabook,Remote,2,ASSIGNED,1549.95,2024-05-22,true
+ST011,ST-Field Technician Kit,Field,3,BROKEN,875.00,2023-07-19,true
+ST012,ST-Old Projector,Closet A,1,IN_STOCK,,2018-02-11,false
+ST013,ST-Loaner iPad Mini,Library,6,ASSIGNED,abc,2023-03-03,true
+ST014,ST-Test Thin Client,Lab B,10,IN_STOCK,349.99,2023/05/01,false
+ST015,ST-Obsolete Desktop,Storage,2,RETIRED,-200.00,2017-09-09,false
+ST016,ST-Spare Dock,Office 2,IN_STOCK,129.99,2023-01-15,true
+ST017,ST-Missing Columns Device,Office 3,4,IN_STOCK,299.99
+ST018,ST-No Date Scanner,Mail Room,1,IN_STOCK,149.99,,false
+ST019,ST-Short Row Camera,Front Lobby,2,ASSIGNED
+ST020,ST-Duplicate Tag Demo,Lab C,5,IN_STOCK,499.99,2024-09-09,false
