@@ -99,7 +99,7 @@ public final class MainController {
         });
         colQty.setCellValueFactory(c -> Bindings.createObjectBinding(c.getValue()::getQuantity));
         colUnitCost.setCellValueFactory(c -> Bindings.createObjectBinding(c.getValue()::getUnitCost));
-        colUnitCost.setCellFactory(_ -> new TableCell<Asset, BigDecimal>() {
+        colUnitCost.setCellFactory(v -> new TableCell<Asset, BigDecimal>() {
             private final NumberFormat fmt = NumberFormat.getCurrencyInstance();
             @Override protected void updateItem(BigDecimal v, boolean empty) {
                 super.updateItem(v, empty);
