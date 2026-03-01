@@ -1,122 +1,183 @@
 # Invexus DMS
 
 **Team and Roles:**
-* LaTroy Richardson Sr - Lead Developer and Project Documentation Manager
+- LaTroy Richardson Sr — Lead Developer & Project Documentation Manager
 
+---
 
-**Invexus DMS** – Track Smarter. Manage Better.
+## 🚀 Build Status (CI/CD)
 
-Invexus DMS (Data Management System) is a Java / JavaFX desktop application for managing business and IT assets such as laptops, monitors, servers, and peripherals. It supports in-memory storage for quick testing and optional MySQL persistence for real-world scenarios.
+Invexus DMS uses a **Jenkins CI pipeline running in Docker** to automate building, testing, and packaging.
 
+### ✔ Pipeline Features
+- Automated Maven builds (`mvn clean test`)
+- JUnit test reporting
+- Artifact packaging
+- Continuous integration from GitHub commits
 
+> 📸 Add your screenshot here:
+> `assets/jenkins-build-success.png`
 
-## Design
+---
 
-- [Architecture Overview](docs/Architecture.md)
-- [UI & Flow](docs/UI.md)
-- [Data Model](docs/DataModel.md)
-- [Test Plan](docs/TestPlan.md)
+## 🖥️ Invexus DMS — Track Smarter. Manage Better.
 
-> _Note:_ These docs reflect the overall system design, including the CLI → GUI evolution, layered architecture, and testing strategy.
+Invexus DMS (Data Management System) is a **Java / JavaFX desktop application** for managing business and IT assets such as laptops, monitors, servers, and peripherals.
 
+It supports:
 
+- ⚡ In-memory storage for quick testing
+- 💾 MySQL persistence for real-world scenarios
+- 🧪 Automated testing and CI pipeline integration
 
-## Built With
+---
+
+## 📐 Design Documentation
+
+- [Architecture Overview](Docs/Architecture.md)
+- [UI & Flow](Docs/UI.md)
+- [Data Model](Docs/DataModel.md)
+- [Test Plan](Docs/TestPlan.md)
+
+> These documents reflect the full system lifecycle, including CLI → GUI evolution, layered architecture, and testing strategy.
+
+---
+
+## 🛠️ Built With
+
+<a href="https://www.jenkins.io">
+    <img src="https://devtools.in/wp-content/uploads/2024/03/image-2.png" alt="jenkins" width="100">
+</a>
 
 <a href="https://www.java.com/">
-  <img src="https://upload.wikimedia.org/wikipedia/en/3/30/Java_programming_language_logo.svg" alt="Java" width="120"/>
+  <img src="https://upload.wikimedia.org/wikipedia/en/3/30/Java_programming_language_logo.svg" alt="Java" width="50"/>
 </a>
 
 <a href="https://openjfx.io/">
-  <img src="https://upload.wikimedia.org/wikipedia/en/f/fd/JavaFX_Logo.png" alt="JavaFX" width="150"/>
+  <img src="https://codigojava.online/wp-content/uploads/2023/02/JavaFX.png" alt="JavaFX" width="100"/>
 </a>
 
 <a href="https://maven.apache.org/">
-  <img src="https://maven.apache.org/images/maven-logo-black-on-white.png" alt="Maven" width="200"/>
+  <img src="https://maven.apache.org/images/maven-logo-black-on-white.png" alt="Maven" width="100"/>
 </a>
 
 <a href="https://www.mysql.com/">
-  <img src="https://www.mysql.com/common/logos/logo-mysql-170x115.png" alt="MySQL" width="150"/>
+  <img src="https://www.mysql.com/common/logos/logo-mysql-170x115.png" alt="MySQL" width="100"/>
 </a>
 
 <a href="https://junit.org/">
-  <img src="https://junit.org/junit5/assets/img/junit5-logo.png" alt="JUnit" width="150"/>
+  <img src="https://junit.org/junit5/assets/img/junit5-logo.png" alt="JUnit" width="50"/>
+</a>
+
+<a href="https://www.Docker.com">
+    <img src="https://images.icon-icons.com/2415/PNG/512/docker_original_logo_icon_146556.png"alt="Docker" width="100"/>
 </a>
 
 
+---
 
-## Intended Users
+## 👥 Intended Users
 
-Invexus DMS is designed for:
+### 💻 Small IT Teams / Help Desks
+Track laptops, monitors, peripherals, and employee assignments.
 
-* **Small IT Teams / Help Desks:** Track laptops, monitors, docks, and other hardware assigned to employees or workstations.
-* **Computer Labs & Training Rooms:** Keep up with shared equipment, where it is, and whether it’s in use or in repair.
-* **Small Businesses & Home Offices:** Maintain a lightweight inventory of assets without needing a full-blown enterprise system.
+### 🏫 Computer Labs / Training Rooms
+Manage shared equipment and availability status.
 
-The goal is to provide a **simple, focused** inventory and asset tracker that can grow from a classroom project into a practical, real-world tool.
+### 🏢 Small Businesses / Home Offices
+Maintain lightweight inventory without enterprise complexity.
 
+---
 
+## ⚙️ Core Functionality
 
-## Functionality
+### Asset Management (CRUD)
+- Add, edit, and delete assets
+- Unique asset tagging system
+- Status tracking (`IN_STOCK`, `ASSIGNED`, `REPAIR`, `RETIRED`)
+- Assignment tracking
 
-* **Asset Management (CRUD)**
-   * Add new assets with fields:
-      * `assetTag` (unique ID)
-      * `name`
-      * `location`
-      * `purchaseDate`
-      * `unitCost`
-      * `quantity`
-      * `status` (`IN_STOCK`, `ASSIGNED`, `REPAIR`, `RETIRED`)
-      * `assigned` (true/false)
-   * Edit existing assets and save changes back to the repository
-   * Delete assets by tag
+---
 
-* **JavaFX UI**
-   * Table view showing all assets
-   * Location displayed alongside other core attributes
-   * Add / Edit / Delete buttons
-   * Filters by status and tag/search text
-   * UI refreshes automatically after every change
+### JavaFX User Interface
+- Interactive TableView display
+- Real-time filtering by tag/status
+- Automatic UI refresh after changes
 
-* **CSV / File Import**
-   * Import assets from CSV or text files
-   * Validates:
-      * Money format (`unitCost`)
-      * Flexible date formats (`purchaseDate`)
-      * Quantity ranges
-      * Status values (mapping to `AssetStatus`)
-      * Boolean values for `assigned` (supports yes/no, y/n, true/false)
-   * Skips duplicates based on `assetTag` instead of crashing
+---
 
-* **Reporting / Metrics**
-   * Calculate **total inventory value** across all assets (`unitCost * quantity`)
+### CSV / File Import
+- Import assets from CSV or text files
+- Data validation:
+    - Currency formatting
+    - Flexible date parsing
+    - Status mapping
+    - Boolean value interpretation
+- Duplicate asset detection
 
-* **Multiple Storage Options**
-   * In-memory repository (`InMemoryAssetRepository`) for quick testing and demos
-   * MySQL-backed repository (`ARepoMySQL`) for persistent storage
+---
 
+### Reporting Features
+- Calculate total inventory value
+- Quantity-based cost calculations
 
+---
 
-## Install Extensions (Optional but Helpful)
+### Storage Options
+- In-memory repository for testing
+- MySQL-backed repository for persistence
 
-If you are working in VS Code or IntelliJ, the following extensions / tools are recommended:
+---
 
--   Checkstyle or similar Java linter/formatter
--   Lombok plugin (if you extend the project to use Lombok)
--   Java and JavaFX support plugins for your IDE
+## 🔄 CI/CD Pipeline (Jenkins)
 
+This project demonstrates a full **continuous integration workflow**.
 
+### Pipeline Stages
 
-## Java & Maven Setup (Local Development)
+1. **Checkout**
+    - Pull latest code from GitHub
 
-Make sure you have:
+2. **Build & Test**
+    - Runs:
+      ```bash
+      mvn clean test
+      ```
+    - Executes JUnit tests
+    - Publishes test reports
 
-- Java JDK 17 or higher
+3. **Package**
+    - Runs:
+      ```bash
+      mvn -DskipTests package
+      ```
+    - Builds deployable JAR
+
+4. **Artifact Archiving**
+    - Jenkins stores build outputs for download
+
+---
+
+## 🐳 Containerization (Docker)
+
+Jenkins runs inside a Docker container to ensure:
+
+- Consistent build environment
+- Easy reproducibility
+- Portable CI setup
+
+---
+
+## 💻 Local Development Setup
+
+### Requirements
+- Java 21
 - Maven 3.x
 
-From the project root:
+---
+
+### Verify Installation
 
 ```bash
-mvn -version
 java -version
+mvn -version
